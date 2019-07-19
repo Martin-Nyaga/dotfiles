@@ -1,0 +1,34 @@
+#! /usr/bin/env ruby 
+
+# Setup dotfiles
+
+# main entry point
+def main
+  Dir.chdir ENV['HOME'] do
+    setup_vim
+    setup_bash_profile
+    setup_tmux_conf
+  end
+end
+
+# Ensure all commands are idempotent
+def setup_vim
+  puts 'Setting up vim...'
+  system 'rm -rf ~/.vim_runtime 2> /dev/null'
+  system 'ln -sf ~/.dotfiles/vim_runtime ~/.vim_runtime'
+  system 'rm -rf ~/.dotfiles/vim_runtime/plugins/Vundle.vim 2>/dev/null && git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim_runtime/plugins/Vundle.vim'
+  system 'sh ~/.vim_runtime/install.sh'
+end
+
+def setup_bash_profile
+  puts 'Setting up bash...'
+  system 'ln -sf ~/.dotfiles/.bash_profile ~/.bash_profile'
+end
+
+def setup_tmux_conf
+  puts 'Setting up tmux...'
+  system 'ln -sf ~/.dotfiles/.tmux.conf ~/.tmux.conf'
+end
+
+# Call main entry point
+main

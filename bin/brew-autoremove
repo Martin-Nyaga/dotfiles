@@ -1,0 +1,26 @@
+#! /usr/bin/env ruby
+
+# Remove brew formulas that are no longer needed
+
+$visited_formulas = ["brew-cask"]
+
+def check_formulas(formulae)
+  formulae.each do |formula|
+    dependees = list_output "brew uses --installed #{formula}"
+
+    if dependees.empty? && !$visited_formulas.include?(formula)
+      info = `brew info #{formula}`
+      size_line = info.split("\n")[3]
+      size = size_line.split("(").last.split(")").first.split(", ").last
+      puts "#{formula}, #{size}"
+    end
+  end
+end
+
+def list_output(comm)
+  `#{comm}`.split(/\s|\t|\n/)
+end
+
+puts "Searching for formulas not depended on by other formulas..."
+
+check_formulas( list_output "brew list" )

@@ -1,0 +1,4 @@
+temp_dirs
+vim_runtime/plugins/*
+!vim_runtime/plugins/.keep
+vim_runtime/.netrwhist
