@@ -13,7 +13,6 @@ Plugin 'pangloss/vim-javascript'
 Plugin 'mxw/vim-jsx'
 Plugin 'plasticboy/vim-markdown'
 Plugin 'xolox/vim-misc'
-Plugin 'xolox/vim-notes'
 Plugin 'reedes/vim-pencil'
 Plugin 'tpope/vim-repeat'
 Plugin 'Shougo/deoplete.nvim'
@@ -74,12 +73,6 @@ let g:fzf_colors =
   \ 'marker':  ['fg', 'Keyword'],
   \ 'spinner': ['fg', 'Label'],
   \ 'header':  ['fg', 'Comment'] }
-
-
-" => Vim Notes
-let g:notes_directories = ['~/Personal Drive/Notes']
-let g:notes_suffix = '.txt'
-let g:notes_title_sync = 'rename_file'
 
 " => Goyo 
 nnoremap <Leader>z :Goyo<CR>

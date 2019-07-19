@@ -48,7 +48,6 @@ alias tmux='tmux -2'
 
 # Common Projects
 alias cdvpi='cd ~/Documents/VPI/Repositories/vpi'
-alias cdtinga='cd ~/Documents/Nobilis/Tinga/Repositories/tinga-app'
 alias tvpi='cdvpi && tmux attach-session -t vpi || tmux new -s vpi'
 
 # Common git commands
