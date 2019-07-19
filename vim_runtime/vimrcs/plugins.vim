@@ -6,7 +6,7 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'mileszs/ack.vim'
 Plugin 'junegunn/fzf.vim'
 Plugin 'junegunn/goyo.vim'
-" Plugin 'scrooloose/nerdtree'
+Plugin 'scrooloose/nerdtree'
 Plugin 'godlygeek/tabular'
 Plugin 'tpope/vim-commentary'
 Plugin 'pangloss/vim-javascript'
@@ -33,17 +33,17 @@ Plugin 'ngmy/vim-rubocop'
 
 call vundle#end()
 
-" " => Nerd Tree
-" let g:NERDTreeWinPos = "left"
-" let NERDTreeShowHidden=0
-" let NERDTreeIgnore = ['.DS_Store']
-" let g:NERDTreeWinSize=35
-" map <leader>nn :NERDTreeToggle<cr>
-" map <leader>nb :NERDTreeFromBookmark<Space>
-" map <leader>nf :NERDTreeFind<cr>
-" let g:NERDTreeDirArrowExpandable = ""
-" let g:NERDTreeDirArrowCollapsible = ""
-" let NERDTreeMinimalUI=1
+" => Nerd Tree
+let g:NERDTreeWinPos = "left"
+let NERDTreeShowHidden=0
+let NERDTreeIgnore = ['.DS_Store']
+let g:NERDTreeWinSize=35
+map <leader>nn :NERDTreeToggle<cr>
+map <leader>nb :NERDTreeFromBookmark<Space>
+map <leader>nf :NERDTreeFind<cr>
+let g:NERDTreeDirArrowExpandable = ""
+let g:NERDTreeDirArrowCollapsible = ""
+let NERDTreeMinimalUI=1
 
 " => surround.vim config
 " Annotate strings with gettext
