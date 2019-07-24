@@ -39,6 +39,11 @@ let g:python3_host_prog = '/usr/local/bin/python3'
 " Set 7 lines to the cursor - when moving vertically using j/k
 set so=7
 
+" Pipe cursor in insert mode
+let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
+let &t_SR = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=2\x7\<Esc>\\"
+let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\" 
+
 " Turn on the Wild menu
 set wildmenu
 
@@ -163,7 +168,7 @@ map <leader>ss :setlocal spell!<cr>
 " Turn persistent undo on
 " means that you can undo even when you close a buffer/VIM
 try
-  set undodir=~/.vim_runtime/temp_dirs/undodir
+  set undodir=~/.vim/temp_dirs/undodir
   set undofile
 catch
 endtry

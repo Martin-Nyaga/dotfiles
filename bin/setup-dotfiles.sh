@@ -2,12 +2,13 @@
 
 setup_vim () {
   echo "Setting up vim..."
-  rm -rf ~/.vim_runtime 2> /dev/null
-  ln -sf ~/.dotfiles/vim_runtime ~/.vim_runtime
-  # Install vundle
-  rm -rf ~/.vim_runtime/plugins/Vundle.vim
-  git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim_runtime/plugins/Vundle.vim
-  bash ~/.vim_runtime/install.sh
+  rm -rf ~/.vim 2> /dev/null
+  ln -sf ~/.dotfiles/vim ~/.vim
+
+  # Install vim plug
+  curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+      https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  bash ~/.vim/install.sh
 }
 
 setup_bash_profile () {

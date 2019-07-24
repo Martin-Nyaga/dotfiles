@@ -1,4 +1,7 @@
 temp_dirs
-vim_runtime/plugins/*
-!vim_runtime/plugins/.keep
-vim_runtime/.netrwhist
+vim/plugins/*
+!vim/plugins/.keep
+vim/.netrwhist
+vim/autoload/plug.vim
+
+

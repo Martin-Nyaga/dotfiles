@@ -1,36 +1,33 @@
-" Load Vundle
-set rtp+=$HOME/.vim_runtime/plugins/Vundle.vim
-call vundle#begin('~/.vim_runtime/plugins')
+" Load Plugins
+call plug#begin('~/.vim/plugins')
 
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'mileszs/ack.vim'
-Plugin 'junegunn/fzf.vim'
-Plugin 'junegunn/goyo.vim'
-Plugin 'scrooloose/nerdtree'
-Plugin 'godlygeek/tabular'
-Plugin 'tpope/vim-commentary'
-Plugin 'pangloss/vim-javascript'
-Plugin 'mxw/vim-jsx'
-Plugin 'plasticboy/vim-markdown'
-Plugin 'xolox/vim-misc'
-Plugin 'reedes/vim-pencil'
-Plugin 'tpope/vim-repeat'
-Plugin 'Shougo/deoplete.nvim'
-Plugin 'vim-scripts/loremipsum'
-Plugin 'mattn/emmet-vim'
-Plugin 'prettier/vim-prettier'
-Plugin 'ap/vim-css-color'
-Plugin 'ayu-theme/ayu-vim'
-Plugin 'sstallion/vim-wtf'
-Plugin 'dracula/vim'
-Plugin 'drewtempelmeyer/palenight.vim'
-Plugin 'ryanoasis/vim-devicons'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'sonph/onehalf', {'rtp': 'vim/'}
-Plugin 'tpope/vim-fugitive'
-Plugin 'ngmy/vim-rubocop'
+Plug 'mileszs/ack.vim'
+Plug 'junegunn/fzf.vim'
+Plug 'junegunn/goyo.vim'
+Plug 'scrooloose/nerdtree'
+Plug 'godlygeek/tabular'
+Plug 'tpope/vim-commentary'
+Plug 'pangloss/vim-javascript'
+Plug 'mxw/vim-jsx'
+Plug 'plasticboy/vim-markdown'
+Plug 'xolox/vim-misc'
+Plug 'reedes/vim-pencil'
+Plug 'tpope/vim-repeat'
+Plug 'vim-scripts/loremipsum'
+Plug 'mattn/emmet-vim'
+Plug 'prettier/vim-prettier'
+Plug 'ap/vim-css-color'
+Plug 'ayu-theme/ayu-vim'
+Plug 'sstallion/vim-wtf'
+Plug 'dracula/vim'
+Plug 'drewtempelmeyer/palenight.vim'
+Plug 'ryanoasis/vim-devicons'
+Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-fugitive'
+Plug 'ngmy/vim-rubocop'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
-call vundle#end()
+call plug#end()
 
 " => Nerd Tree
 let g:NERDTreeWinPos = "left"
@@ -51,6 +48,7 @@ au FileType mako vmap Si S"i${ _(<esc>2f"a) }<esc>
 
 " => Colorscheme 
 set background=dark
+let g:dracula_italic = 0
 colorscheme dracula
 
 " => FZF
@@ -81,11 +79,6 @@ nnoremap <Leader>z :Goyo<CR>
 let g:pencil#wrapModeDefault = 'soft'
 let g:pencil#conceallevel = 0
 autocmd BufRead,BufNewfile *.tex call pencil#init()
-
-" => Deoplete Vim 
-let g:deoplete#enable_at_startup = 1
-" Use <TAB> for completion with deoplete
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 
 " => Prettier
 let g:prettier#autoformat = 0
