@@ -3,13 +3,11 @@ call plug#begin('~/.vim/plugins')
 
 Plug 'mileszs/ack.vim'
 Plug 'junegunn/fzf.vim'
-Plug 'junegunn/goyo.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'godlygeek/tabular'
 Plug 'tpope/vim-commentary'
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
-Plug 'plasticboy/vim-markdown'
 Plug 'xolox/vim-misc'
 Plug 'reedes/vim-pencil'
 Plug 'tpope/vim-repeat'
@@ -17,15 +15,12 @@ Plug 'vim-scripts/loremipsum'
 Plug 'mattn/emmet-vim'
 Plug 'prettier/vim-prettier'
 Plug 'ap/vim-css-color'
-Plug 'ayu-theme/ayu-vim'
-Plug 'sstallion/vim-wtf'
 Plug 'dracula/vim'
-Plug 'drewtempelmeyer/palenight.vim'
 Plug 'ryanoasis/vim-devicons'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
-Plug 'ngmy/vim-rubocop'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'adelarsq/vim-matchit'
+Plug 'ecomba/vim-ruby-refactoring'
 
 call plug#end()
 
@@ -83,7 +78,3 @@ autocmd BufRead,BufNewfile *.tex call pencil#init()
 " => Prettier
 let g:prettier#autoformat = 0
 nnoremap <Leader>p :PrettierAsync<CR>
-
-" => Rubocop
-let g:vimrubocop_keymap = 0
-nmap <Leader>r :RuboCop<CR>
