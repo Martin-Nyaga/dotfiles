@@ -1,9 +1,6 @@
 " Sets how many lines of history VIM has to remember
 set history=10
 
-" Vertical diffs for git diff and mergetool
-set diffopt+=vertical
-
 " Enable filetype plugins
 filetype plugin on
 filetype indent on
@@ -32,22 +29,17 @@ set nocompatible
 " Enable folding
 set foldmethod=indent
 
-" Enable python support for neovim
-let g:python2_host_prog = '/usr/local/bin/python'
-let g:python3_host_prog = '/usr/local/bin/python3'
-
 " Set 7 lines to the cursor - when moving vertically using j/k
 set so=7
 
-" Pipe cursor in insert mode
+" Change cursor per mode 
 let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
 let &t_SR = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=2\x7\<Esc>\\"
 let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\" 
 
 " Turn on the Wild menu
 set wildmenu
-
-" Ignore compiled files
+" Ignore files in the wildmenu
 set wildignore=*.o,*~,*.pyc,*/.git/*,*/.hg/*,*/.svn/*,*/.DS_Store
 
 " Height of the command bar
@@ -71,7 +63,7 @@ set incsearch
 set lazyredraw
 
 " How long before updating
-set updatetime=100
+set updatetime=80
 
 " For regular expressions turn magic on
 set magic
@@ -172,9 +164,6 @@ try
   set undofile
 catch
 endtry
-
-" Insert the date
-iab xdate <c-r>=strftime("%d/%m/%y %H:%M:%S")<cr>
 
 " Ack searching and cope displaying
 " Use the the_silver_searcher if possible (much faster than Ack)

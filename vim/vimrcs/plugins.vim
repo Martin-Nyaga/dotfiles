@@ -30,16 +30,10 @@ let NERDTreeShowHidden=0
 let NERDTreeIgnore = ['.DS_Store']
 let g:NERDTreeWinSize=35
 map <leader>nn :NERDTreeToggle<cr>
-map <leader>nb :NERDTreeFromBookmark<Space>
 map <leader>nf :NERDTreeFind<cr>
 let g:NERDTreeDirArrowExpandable = ""
 let g:NERDTreeDirArrowCollapsible = ""
 let NERDTreeMinimalUI=1
-
-" => surround.vim config
-" Annotate strings with gettext
-vmap Si S(i_<esc>f)
-au FileType mako vmap Si S"i${ _(<esc>2f"a) }<esc>
 
 " => Colorscheme 
 set background=dark
@@ -66,9 +60,6 @@ let g:fzf_colors =
   \ 'marker':  ['fg', 'Keyword'],
   \ 'spinner': ['fg', 'Label'],
   \ 'header':  ['fg', 'Comment'] }
-
-" => Goyo 
-nnoremap <Leader>z :Goyo<CR>
 
 " => Vim Pencil for latex  & notes
 let g:pencil#wrapModeDefault = 'soft'
