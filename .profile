@@ -38,9 +38,6 @@ alias gpu='git push -u origin '
 # Rust
 [ -f ~/.cargo/env ] && source ~/.cargo/env
 
-# Autojump
-[ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
-
 # Exa
 if hash exa 2>/dev/null; then
   alias ls='exa'
