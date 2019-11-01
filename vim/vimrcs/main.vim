@@ -1,4 +1,4 @@
-" Sets how many lines of history VIM has to remember
+" Sethow many lines of history VIM has to remember
 set history=10
 
 " Enable filetype plugins
@@ -19,6 +19,7 @@ nmap <leader>w :w!<cr>
 
 " Full screen zooming
 nmap zi :tab split<cr>
+ca tn tabnew<cr>
 
 " Enable yank to system clipboard
 set clipboard=unnamed
@@ -30,12 +31,15 @@ set nocompatible
 set foldmethod=indent
 
 " Set 7 lines to the cursor - when moving vertically using j/k
-set so=7
+set so=2
 
 " Change cursor per mode 
 let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
 let &t_SR = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=2\x7\<Esc>\\"
 let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\" 
+
+" Highlight line under cursor
+set cursorline
 
 " Turn on the Wild menu
 set wildmenu
@@ -60,6 +64,7 @@ set hlsearch
 set incsearch
 
 " Don't redraw while executing macros (good performance config)
+set ttyfast
 set lazyredraw
 
 " How long before updating
@@ -78,6 +83,9 @@ set noerrorbells
 set novisualbell
 set t_vb=
 set tm=500
+
+" Diffopt
+set diffopt+=vertical
 
 " Show line numbers
 set number
@@ -106,6 +114,9 @@ set expandtab
 
 " Be smart when using tabs ;)
 set smarttab
+
+" Relative line numbers
+set relativenumber
 
 " 1 tab == 2 spaces
 set shiftwidth=2
@@ -154,6 +165,10 @@ if has("autocmd")
   autocmd BufWritePre *.rb,*.txt,*.js,*.py,*.wiki,*.sh,*.coffee,*.haml :call CleanExtraSpaces()
 endif
 
+" Fast shortcuts for netrw
+map <leader>nn :Explore.<cr>
+map <leader>nf :Explore<cr>
+
 " Pressing <leader>ss will toggle and untoggle spell checking
 map <leader>ss :setlocal spell!<cr>
 
@@ -165,10 +180,13 @@ try
 catch
 endtry
 
-" Ack searching and cope displaying
-" Use the the_silver_searcher if possible (much faster than Ack)
+" Ack searching and cope displaying - Use ripgrep as vimgrep
 if executable('ag')
-  let g:ackprg = 'ag --vimgrep --smart-case'
+	let g:ackprg='ag --vimgrep'
+endif
+if executable('rg')
+	let g:ackprg='rg --no-heading --vimgrep'
+	set grepformat=%f:%l:%c:%m
 endif
 
 " When you press gv you Ack after the selected text

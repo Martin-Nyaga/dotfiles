@@ -12,8 +12,18 @@ setup_vim () {
 }
 
 setup_bash_profile () {
-  echo "Setting up bash_profile..."
+  echo "Setting up bash profile..."
   ln -sf ~/.dotfiles/.bash_profile ~/.bash_profile
+}
+
+setup_oh_my_zsh() {
+  echo "Setting up oh-my-zsh profile..."
+  export ZSH="~/.dotfiles/oh-my-zsh"
+  rm -rf $ZSH
+  sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)" "" --unattended
+  # Remove oh-my-zsh generated zshrc so that I can instead use my custom one
+  rm ~/.zshrc
+  ln -sf ~/.dotfiles/.zshrc ~/.zshrc
 }
 
 setup_tmux () {
@@ -21,10 +31,22 @@ setup_tmux () {
   ln -sf ~/.dotfiles/.tmux.conf ~/.tmux.conf
 }
 
+setup_alacritty () {
+  echo 'Setting up alacritty config...'
+  ln -sf ~/.dotfiles/alacritty.yml ~/.config/alacritty/alacritty.yml
+}
+
+list_todos () {
+  echo 'Make sure to run bin/install-deps-{platform}.sh!'
+}
+
 # Setup dotfiles
 cd
 setup_vim
 setup_bash_profile
+setup_oh_my_zsh
 setup_tmux
+setup_alacritty
+list_todos
 
 echo "Done"

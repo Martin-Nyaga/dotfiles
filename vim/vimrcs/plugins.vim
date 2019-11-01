@@ -3,47 +3,42 @@ call plug#begin('~/.vim/plugins')
 
 Plug 'mileszs/ack.vim'
 Plug 'junegunn/fzf.vim'
-Plug 'scrooloose/nerdtree'
+Plug 'Martin-Nyaga/vim-vinegar'
 Plug 'godlygeek/tabular'
 Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-surround'
 Plug 'pangloss/vim-javascript'
-Plug 'mxw/vim-jsx'
-Plug 'xolox/vim-misc'
-Plug 'reedes/vim-pencil'
+Plug 'maxmellon/vim-jsx-pretty'
 Plug 'tpope/vim-repeat'
-Plug 'vim-scripts/loremipsum'
 Plug 'mattn/emmet-vim'
 Plug 'prettier/vim-prettier'
 Plug 'ap/vim-css-color'
-Plug 'dracula/vim'
-Plug 'ryanoasis/vim-devicons'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
 Plug 'adelarsq/vim-matchit'
 Plug 'ecomba/vim-ruby-refactoring'
+Plug 'patstockwell/vim-monokai-tasty'
+Plug 'jiangmiao/auto-pairs'
+Plug 'tpope/vim-endwise'
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py --ts-completer --rust-completer' }
+Plug 'airblade/vim-rooter'
+Plug 'rust-lang/rust.vim'
+Plug 'Martin-Nyaga/vim-rubocop'
+Plug 'aliou/sql-heredoc.vim'
+Plug 'tpope/vim-rails'
+Plug 'mhinz/vim-startify'
 
 call plug#end()
 
-" => Nerd Tree
-let g:NERDTreeWinPos = "left"
-let NERDTreeShowHidden=0
-let NERDTreeIgnore = ['.DS_Store']
-let g:NERDTreeWinSize=35
-map <leader>nn :NERDTreeToggle<cr>
-map <leader>nf :NERDTreeFind<cr>
-let g:NERDTreeDirArrowExpandable = ""
-let g:NERDTreeDirArrowCollapsible = ""
-let NERDTreeMinimalUI=1
-
 " => Colorscheme 
 set background=dark
-let g:dracula_italic = 0
-colorscheme dracula
+let g:vim_monokai_tasty_italic = 1
+colorscheme vim-monokai-tasty
 
 " => FZF
 " Add fzf to vim path
 set rtp+=/usr/local/opt/fzf
-map <C-F> :Files<cr>
+map <C-F> :GFiles<cr>
 map <C-A> :Buffers<cr>
 " Use same colorscheme as vim
 let g:fzf_colors =
@@ -69,3 +64,11 @@ autocmd BufRead,BufNewfile *.tex call pencil#init()
 " => Prettier
 let g:prettier#autoformat = 0
 nnoremap <Leader>p :PrettierAsync<CR>
+
+" => Rustfmt
+let g:rustfmt_autosave = 1
+
+" => RuboCop
+let g:vimrubocop_keymap = 0
+nmap <Leader>ru :RuboCop<CR>
+nmap <Leader>rf :RuboCop -a -s<CR>

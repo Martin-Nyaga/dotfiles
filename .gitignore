@@ -3,5 +3,6 @@ vim/plugins/*
 !vim/plugins/.keep
 vim/.netrwhist
 vim/autoload/plug.vim
+vim/view
 
-
+oh-my-zsh
