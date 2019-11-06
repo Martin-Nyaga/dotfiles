@@ -1,6 +1,7 @@
 " Load Plugins
 call plug#begin('~/.vim/plugins')
 
+Plug 'vim-ruby/vim-ruby'
 Plug 'mileszs/ack.vim'
 Plug 'junegunn/fzf.vim'
 Plug 'Martin-Nyaga/vim-vinegar'
@@ -18,7 +19,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'adelarsq/vim-matchit'
 Plug 'ecomba/vim-ruby-refactoring'
 Plug 'patstockwell/vim-monokai-tasty'
-Plug 'jiangmiao/auto-pairs'
+Plug 'tmsvg/pear-tree'
 Plug 'tpope/vim-endwise'
 Plug 'Valloric/YouCompleteMe', { 'do': './install.py --ts-completer --rust-completer' }
 Plug 'airblade/vim-rooter'

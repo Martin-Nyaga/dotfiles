@@ -161,9 +161,12 @@ fun! CleanExtraSpaces()
   call setreg('/', old_query)
 endfun
 
-if has("autocmd")
-  autocmd BufWritePre *.rb,*.txt,*.js,*.py,*.wiki,*.sh,*.coffee,*.haml :call CleanExtraSpaces()
-endif
+" Trim whitespace
+autocmd BufWritePre *.rb,*.txt,*.js,*.py,*.wiki,*.sh,*.coffee,*.haml :call CleanExtraSpaces()
+
+" correct folding for js and ruby
+autocmd BufEnter *.js set syntax=javaScript
+autocmd BufEnter *.js set foldmethod=syntax
 
 " Fast shortcuts for netrw
 map <leader>nn :Explore.<cr>
@@ -220,6 +223,11 @@ set showtabline=1
 " Delete/Paste without yanking
 vnoremap p "_dP
 
+" Easy shortcuts to open vim settings 
+command Evimrc e $HOME/.vim/vimrcs/main.vim
+command Eplugins e $HOME/.vim/vimrcs/plugins.vim
+command Reload source $MYVIMRC
+
 " Helper functions
 function! CmdLine(str)
   call feedkeys(":" . a:str)
@@ -240,13 +248,4 @@ function! VisualSelection(direction, extra_filter) range
 
   let @/ = l:pattern
   let @" = l:saved_reg
-endfunction
-
-function! GitBranch()
-  return system("git rev-parse --abbrev-ref HEAD 2>/dev/null | tr -d '\n'")
-endfunction
-
-function! StatuslineGit()
-  let l:branchname = GitBranch()
-  return strlen(l:branchname) > 0?' ['.l:branchname.'] ':''
 endfunction

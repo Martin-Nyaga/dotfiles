@@ -26,7 +26,9 @@ export EDITOR=vim
 alias tmux='tmux -2'
 
 # Common Projects
-alias cdvpi='cd ~/Documents/VPI/Repositories/vpi'
+alias cdd='cd $HOME/.dotfiles'
+alias cddotfiles='cd $HOME/.dotfiles'
+alias cdvpi='cd $HOME/Documents/VPI/Repositories/vpi'
 alias tvpi='cdvpi && tmux attach-session -t vpi || tmux new -s vpi'
 
 # Common git commands
