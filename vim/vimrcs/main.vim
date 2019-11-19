@@ -68,7 +68,7 @@ set ttyfast
 set lazyredraw
 
 " How long before updating
-set updatetime=80
+set updatetime=300
 
 " For regular expressions turn magic on
 set magic
@@ -130,11 +130,20 @@ set wrap "Wrap lines
 vnoremap <silent> * :<C-u>call VisualSelection('', '')<CR>/<C-R>=@/<CR><CR>
 vnoremap <silent> # :<C-u>call VisualSelection('', '')<CR>?<C-R>=@/<CR><CR>
 
-" Smart way to move between windows
+" Easy way to move between windows
 map <C-j> <C-W>j
 map <C-k> <C-W>k
 map <C-h> <C-W>h
 map <C-l> <C-W>l
+
+" Fix window navigation in netrw
+augroup netrw_mapping
+  autocmd!
+  autocmd filetype netrw call NetrwMapping()
+augroup END
+function! NetrwMapping()
+  nnoremap <buffer> <c-l> :wincmd l<cr>
+endfunction
 
 " Allow mouse support - useful for copy paste
 set mouse=a
@@ -165,8 +174,7 @@ endfun
 autocmd BufWritePre *.rb,*.txt,*.js,*.py,*.wiki,*.sh,*.coffee,*.haml :call CleanExtraSpaces()
 
 " correct folding for js and ruby
-autocmd BufEnter *.js set syntax=javaScript
-autocmd BufEnter *.js set foldmethod=syntax
+autocmd BufEnter *.js setlocal syntax=javaScript
 
 " Fast shortcuts for netrw
 map <leader>nn :Explore.<cr>
@@ -224,9 +232,17 @@ set showtabline=1
 vnoremap p "_dP
 
 " Easy shortcuts to open vim settings 
-command Evimrc e $HOME/.vim/vimrcs/main.vim
-command Eplugins e $HOME/.vim/vimrcs/plugins.vim
-command Reload source $MYVIMRC
+command! Evimrc e $HOME/.vim/vimrcs/main.vim
+command! Eplugins e $HOME/.vim/vimrcs/plugins.vim
+command! Reload source $MYVIMRC
+
+" Squiggles
+command! Esquiggles e ./squiggles.txt
+map <leader>sq :Esquiggles<cr>
+
+" Improved omnicomplete
+set completeopt=longest,menuone
+set omnifunc=syntaxcomplete#Complete
 
 " Helper functions
 function! CmdLine(str)

@@ -19,8 +19,11 @@ alias python='python3'
 alias checkdiskusage='du -h -d1 | sort -hr'
 
 # Use vim as editor for react
-export REACT_EDITOR=vim
-export EDITOR=vim
+export REACT_EDITOR=nvim
+export EDITOR=nvim
+
+# Use neovim as default vim
+alias vim='nvim'
 
 # TMUX
 alias tmux='tmux -2'
@@ -30,12 +33,6 @@ alias cdd='cd $HOME/.dotfiles'
 alias cddotfiles='cd $HOME/.dotfiles'
 alias cdvpi='cd $HOME/Documents/VPI/Repositories/vpi'
 alias tvpi='cdvpi && tmux attach-session -t vpi || tmux new -s vpi'
-
-# Common git commands
-alias ga='git add --all'
-alias gcm='git commit -m'
-alias gp='git push'
-alias gpu='git push -u origin '
 
 # Rust
 [ -f ~/.cargo/env ] && source ~/.cargo/env
@@ -50,3 +47,6 @@ fi
 
 # Source tree
 alias gitgui='open -a Sourcetree.app'
+
+# LESS
+export LESS='--no-init --quit-if-one-screen --RAW-CONTROL-CHARS'

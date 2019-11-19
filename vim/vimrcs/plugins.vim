@@ -21,13 +21,19 @@ Plug 'ecomba/vim-ruby-refactoring'
 Plug 'patstockwell/vim-monokai-tasty'
 Plug 'tmsvg/pear-tree'
 Plug 'tpope/vim-endwise'
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py --ts-completer --rust-completer' }
 Plug 'airblade/vim-rooter'
 Plug 'rust-lang/rust.vim'
 Plug 'Martin-Nyaga/vim-rubocop'
 Plug 'aliou/sql-heredoc.vim'
 Plug 'tpope/vim-rails'
 Plug 'mhinz/vim-startify'
+Plug 'terryma/vim-expand-region'
+Plug 'michaeljsmith/vim-indent-object'
+Plug 'majutsushi/tagbar'
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'ervandew/supertab'
+Plug 'ludovicchabant/vim-gutentags'
+Plug 'kristijanhusak/vim-js-file-import', {'do': 'npm install'}
 
 call plug#end()
 
@@ -62,10 +68,6 @@ let g:pencil#wrapModeDefault = 'soft'
 let g:pencil#conceallevel = 0
 autocmd BufRead,BufNewfile *.tex call pencil#init()
 
-" => Prettier
-let g:prettier#autoformat = 0
-nnoremap <Leader>p :PrettierAsync<CR>
-
 " => Rustfmt
 let g:rustfmt_autosave = 1
 
@@ -73,3 +75,16 @@ let g:rustfmt_autosave = 1
 let g:vimrubocop_keymap = 0
 nmap <Leader>ru :RuboCop<CR>
 nmap <Leader>rf :RuboCop -a -s<CR>
+
+" => TagBar
+nmap <Leader>b :TagbarToggle<CR>
+
+" => Ctags - Overwrite Vim-rails options
+let g:Tlist_Ctags_Cmd = "ctags --options=.ctags"
+
+" => Prettier: disable format on save which is too slow
+let g:prettier#autoformat = 0
+nnoremap <Leader>p :PrettierAsync<CR>
+
+" JS File import
+let g:js_file_import_sort_after_insert = 1

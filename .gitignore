@@ -4,5 +4,6 @@ vim/plugins/*
 vim/.netrwhist
 vim/autoload/plug.vim
 vim/view
+vim/tags
 
 oh-my-zsh
