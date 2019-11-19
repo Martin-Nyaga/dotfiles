@@ -131,10 +131,10 @@ vnoremap <silent> * :<C-u>call VisualSelection('', '')<CR>/<C-R>=@/<CR><CR>
 vnoremap <silent> # :<C-u>call VisualSelection('', '')<CR>?<C-R>=@/<CR><CR>
 
 " Easy way to move between windows
-map <C-j> <C-W>j
-map <C-k> <C-W>k
-map <C-h> <C-W>h
-map <C-l> <C-W>l
+" map <C-j> <C-W>j
+" map <C-k> <C-W>k
+" map <C-h> <C-W>h
+" map <C-l> <C-W>l
 
 " Fix window navigation in netrw
 augroup netrw_mapping
@@ -172,9 +172,6 @@ endfun
 
 " Trim whitespace
 autocmd BufWritePre *.rb,*.txt,*.js,*.py,*.wiki,*.sh,*.coffee,*.haml :call CleanExtraSpaces()
-
-" correct folding for js and ruby
-autocmd BufEnter *.js setlocal syntax=javaScript
 
 " Fast shortcuts for netrw
 map <leader>nn :Explore.<cr>

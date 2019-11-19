@@ -7,3 +7,6 @@ vim/view
 vim/tags
 
 oh-my-zsh
+
+# Platform specific config
+.profile.extra

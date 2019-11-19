@@ -12,9 +12,6 @@ eval "$(rbenv init -)"
 # Fzf
 export FZF_DEFAULT_COMMAND='ag --nocolor --ignore node_modules -g ""'
 
-# python3 as default python
-alias python='python3'
-
 # Check disk usage
 alias checkdiskusage='du -h -d1 | sort -hr'
 
@@ -26,13 +23,11 @@ export EDITOR=nvim
 alias vim='nvim'
 
 # TMUX
-alias tmux='tmux -2'
+# alias tmux='tmux -2'
 
 # Common Projects
 alias cdd='cd $HOME/.dotfiles'
 alias cddotfiles='cd $HOME/.dotfiles'
-alias cdvpi='cd $HOME/Documents/VPI/Repositories/vpi'
-alias tvpi='cdvpi && tmux attach-session -t vpi || tmux new -s vpi'
 
 # Rust
 [ -f ~/.cargo/env ] && source ~/.cargo/env
@@ -50,3 +45,6 @@ alias gitgui='open -a Sourcetree.app'
 
 # LESS
 export LESS='--no-init --quit-if-one-screen --RAW-CONTROL-CHARS'
+
+# Platform specific settings
+[ -f ~/.dotfiles/.profile.extra ] && source ~/.dotfiles/.profile.extra

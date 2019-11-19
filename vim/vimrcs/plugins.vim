@@ -3,6 +3,7 @@ call plug#begin('~/.vim/plugins')
 
 Plug 'vim-ruby/vim-ruby'
 Plug 'mileszs/ack.vim'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'Martin-Nyaga/vim-vinegar'
 Plug 'godlygeek/tabular'
@@ -32,7 +33,6 @@ Plug 'michaeljsmith/vim-indent-object'
 Plug 'majutsushi/tagbar'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'ervandew/supertab'
-Plug 'ludovicchabant/vim-gutentags'
 Plug 'kristijanhusak/vim-js-file-import', {'do': 'npm install'}
 
 call plug#end()
@@ -44,7 +44,6 @@ colorscheme vim-monokai-tasty
 
 " => FZF
 " Add fzf to vim path
-set rtp+=/usr/local/opt/fzf
 map <C-F> :GFiles<cr>
 map <C-A> :Buffers<cr>
 " Use same colorscheme as vim
