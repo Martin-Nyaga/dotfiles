@@ -6,8 +6,10 @@ export LSCOLORS=ExFxCxDxBxegedabagacad
 export PATH=$PATH:~/.dotfiles/bin
 
 # Rbenv Setup
-export PATH="$HOME/.rbenv/bin:$PATH"
-eval "$(rbenv init -)"
+if hash rbenv 2>/dev/null; then
+  export PATH="$HOME/.rbenv/bin:$PATH"
+  eval "$(rbenv init -)"
+fi
 
 # Fzf
 export FZF_DEFAULT_COMMAND='ag --nocolor --ignore node_modules -g ""'

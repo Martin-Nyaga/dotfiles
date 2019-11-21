@@ -130,21 +130,6 @@ set wrap "Wrap lines
 vnoremap <silent> * :<C-u>call VisualSelection('', '')<CR>/<C-R>=@/<CR><CR>
 vnoremap <silent> # :<C-u>call VisualSelection('', '')<CR>?<C-R>=@/<CR><CR>
 
-" Easy way to move between windows
-" map <C-j> <C-W>j
-" map <C-k> <C-W>k
-" map <C-h> <C-W>h
-" map <C-l> <C-W>l
-
-" Fix window navigation in netrw
-augroup netrw_mapping
-  autocmd!
-  autocmd filetype netrw call NetrwMapping()
-augroup END
-function! NetrwMapping()
-  nnoremap <buffer> <c-l> :wincmd l<cr>
-endfunction
-
 " Allow mouse support - useful for copy paste
 set mouse=a
 
@@ -191,10 +176,6 @@ endtry
 " Ack searching and cope displaying - Use ripgrep as vimgrep
 if executable('ag')
 	let g:ackprg='ag --vimgrep'
-endif
-if executable('rg')
-	let g:ackprg='rg --no-heading --vimgrep'
-	set grepformat=%f:%l:%c:%m
 endif
 
 " When you press gv you Ack after the selected text

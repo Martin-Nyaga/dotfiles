@@ -20,7 +20,7 @@ setup_oh_my_zsh() {
   echo "Setting up oh-my-zsh..."
   export ZSH="~/.dotfiles/oh-my-zsh"
   rm -rf $ZSH
-  sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)" "" --unattended
+  sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
   # Remove oh-my-zsh generated zshrc so that I can instead use my custom one
   rm ~/.zshrc
   ln -sf ~/.dotfiles/.zshrc ~/.zshrc
