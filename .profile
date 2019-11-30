@@ -46,7 +46,7 @@ fi
 alias gitgui='open -a Sourcetree.app'
 
 # LESS
-export LESS='--no-init --quit-if-one-screen --RAW-CONTROL-CHARS'
+export LESS='--RAW-CONTROL-CHARS'
 
 # Platform specific settings
 [ -f ~/.dotfiles/.profile.extra ] && source ~/.dotfiles/.profile.extra

@@ -9,3 +9,6 @@ source ~/.vim/vimrcs/main.vim
 source ~/.vim/vimrcs/plugins.vim
 ' > ~/.vimrc
 ln -sf ~/.vimrc ~/.config/nvim/init.vim
+
+# Link coc settings
+ln -sf ~/.vim/coc-settings.json ~/.config/nvim/coc-settings.json

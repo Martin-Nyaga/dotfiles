@@ -22,7 +22,7 @@ nmap zi :tab split<cr>
 ca tn tabnew<cr>
 
 " Enable yank to system clipboard
-set clipboard=unnamed
+set clipboard=unnamedplus
 
 " No need to be compatible with old Vi
 set nocompatible
@@ -219,8 +219,7 @@ command! Esquiggles e ./squiggles.txt
 map <leader>sq :Esquiggles<cr>
 
 " Improved omnicomplete
-set completeopt=longest,menuone
-set omnifunc=syntaxcomplete#Complete
+set completeopt+=longest,menuone
 
 " Helper functions
 function! CmdLine(str)
@@ -243,3 +242,6 @@ function! VisualSelection(direction, extra_filter) range
   let @/ = l:pattern
   let @" = l:saved_reg
 endfunction
+
+" JSON comments
+autocmd FileType json syntax match Comment +\/\/.\+$+
