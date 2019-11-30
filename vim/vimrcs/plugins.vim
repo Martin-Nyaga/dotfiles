@@ -20,8 +20,8 @@ Plug 'tpope/vim-fugitive'
 Plug 'adelarsq/vim-matchit'
 Plug 'ecomba/vim-ruby-refactoring'
 Plug 'patstockwell/vim-monokai-tasty'
-Plug 'tmsvg/pear-tree'
 Plug 'tpope/vim-endwise'
+Plug 'tmsvg/pear-tree'
 Plug 'airblade/vim-rooter'
 Plug 'rust-lang/rust.vim'
 Plug 'Martin-Nyaga/vim-rubocop'
@@ -30,10 +30,9 @@ Plug 'tpope/vim-rails'
 Plug 'mhinz/vim-startify'
 Plug 'terryma/vim-expand-region'
 Plug 'michaeljsmith/vim-indent-object'
-Plug 'majutsushi/tagbar'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'kristijanhusak/vim-js-file-import', {'do': 'npm install'}
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'neoclide/coc.nvim', {'tag': '*', 'branch': 'release'}
 
 call plug#end()
 
@@ -77,9 +76,6 @@ nmap <Leader>rf :RuboCop -a -s<CR>
 
 " => TagBar
 nmap <Leader>b :TagbarToggle<CR>
-
-" => Ctags - Overwrite Vim-rails options
-let g:Tlist_Ctags_Cmd = "ctags --options=.ctags"
 
 " => Prettier: disable format on save which is too slow
 let g:prettier#autoformat = 0

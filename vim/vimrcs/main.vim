@@ -219,7 +219,7 @@ command! Esquiggles e ./squiggles.txt
 map <leader>sq :Esquiggles<cr>
 
 " Improved omnicomplete
-set completeopt+=longest,menuone
+" set completeopt+=longest,menuone
 
 " Helper functions
 function! CmdLine(str)
