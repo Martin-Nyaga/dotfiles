@@ -19,7 +19,6 @@ Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
 Plug 'adelarsq/vim-matchit'
 Plug 'ecomba/vim-ruby-refactoring'
-Plug 'patstockwell/vim-monokai-tasty'
 Plug 'tpope/vim-endwise'
 Plug 'tmsvg/pear-tree'
 Plug 'airblade/vim-rooter'
@@ -33,13 +32,18 @@ Plug 'michaeljsmith/vim-indent-object'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'kristijanhusak/vim-js-file-import', {'do': 'npm install'}
 Plug 'neoclide/coc.nvim', {'tag': '*', 'branch': 'release'}
+Plug 'leafgarland/typescript-vim'
+Plug 'effkay/argonaut.vim'
+Plug 'patstockwell/vim-monokai-tasty'
+Plug 'connorholyday/vim-snazzy'
+Plug 'chriskempson/tomorrow-theme', {'rtp': '/vim'}
+Plug 'kenwheeler/glow-in-the-dark-gucci-shark-bites-vim'
 
 call plug#end()
 
 " => Colorscheme 
 set background=dark
-let g:vim_monokai_tasty_italic = 1
-colorscheme vim-monokai-tasty
+colorscheme sharkbites 
 
 " => FZF
 " Add fzf to vim path
@@ -79,7 +83,7 @@ nmap <Leader>b :TagbarToggle<CR>
 
 " => Prettier: disable format on save which is too slow
 let g:prettier#autoformat = 0
-nnoremap <Leader>p :PrettierAsync<CR>
+nnoremap <Leader>p :Prettier<CR>
 
 " => JS File import
 let g:js_file_import_sort_after_insert = 1

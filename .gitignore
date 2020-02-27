@@ -5,6 +5,7 @@ vim/.netrwhist
 vim/autoload/plug.vim
 vim/view
 vim/tags
+vim/pythonenv
 
 oh-my-zsh
 

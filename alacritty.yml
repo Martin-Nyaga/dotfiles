@@ -49,7 +49,7 @@ window:
   # Values for `decorations` (macOS only):
   #     - transparent: Title bar, transparent background and title bar buttons
   #     - buttonless: Title bar, transparent background, but no title bar buttons
-  decorations: full
+  decorations: none
 
   # Startup Mode (changes require restart)
   #
@@ -99,7 +99,7 @@ font:
     #   - (macOS) Menlo
     #   - (Linux) monospace
     #   - (Windows) Consolas
-    family: Fira Code 
+    family: Inconsolata
 
     # The `style` can be specified to pick a specific face.
     # style: Light
@@ -110,10 +110,10 @@ font:
     #
     # If the bold family is not specified, it will fall back to the
     # value specified for the normal font.
-    # family: monospace
+    # family: Inconsolata
 
     # The `style` can be specified to pick a specific face.
-    style: Medium
+    style: Bold
 
   # Italic font face
   # italic:
@@ -121,19 +121,19 @@ font:
     #
     # If the italic family is not specified, it will fall back to the
     # value specified for the normal font.
-    # family: IBM Plex Mono
+    # family: Inconsolata LGC 
 
     # The `style` can be specified to pick a specific face.
-    # style: Light Italic 
+    # style: Italic 
 
   # Point size
-  size: 13
+  size: 12.5 
 
   # Offset is the extra space around each character. `offset.y` can be thought of
   # as modifying the line spacing, and `offset.x` as modifying the letter spacing.
   offset:
     x: 0
-    y: 5
+    y: 7
 
   # Glyph offset determines the locations of the glyphs within their cells with
   # the default being at the bottom. Increasing `x` moves the glyph to the right,
@@ -161,34 +161,35 @@ font:
 # If `true`, bold text is drawn using the bright color variants.
 draw_bold_text_with_bright_colors: true
 
-# Colors (Monokai Dark)
+# Colors (Glow In the Dark)
 colors:
   # Default colors
   primary:
-    background: '0x262626'
-    foreground: '0xF8F8F2'
+    background: '0x1f1f1f'
+    foreground: '0xFFFFFF'
+
 
   # Normal colors
   normal:
-   black:   '0x272822'
-   red:     '0xF92672'
-   green:   '0xA6E22E'
-   yellow:  '0xF4BF75'
-   blue:    '0x66D9EF'
-   magenta: '0xAE81FF'
-   cyan:    '0xA1EFE4'
-   white:   '0xF8F8F2'
+   black:   '0x000000'
+   red:     '0xFF5C58'
+   green:   '0x56F856'
+   yellow:  '0xFFFE58'
+   blue:    '0x5EB2F2'
+   magenta: '0xF856B5'
+   cyan:    '0x54F4B4'
+   white:   '0xd0d0d0'
 
   # Bright colors
   bright:
-   black:   '0x75715E'
-   red:     '0xF92672'
-   green:   '0xA6E22E'
-   yellow:  '0xF4BF75'
-   blue:    '0x66D9EF'
-   magenta: '0xAE81FF'
-   cyan:    '0xA1EFE4'
-   white:   '0xF9F8F5'
+   black:   '0x000000'
+   red:     '0xFF5C58'
+   green:   '0x56F856'
+   yellow:  '0xFFFE58'
+   blue:    '0x5EB2F2'
+   magenta: '0xF856B5'
+   cyan:    '0x54F4B4'
+   white:   '0xd0d0d0'
 
 #
 # Any time the BEL code is received, Alacritty "rings" the visual bell. Once
