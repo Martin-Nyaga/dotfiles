@@ -38,6 +38,7 @@ Plug 'patstockwell/vim-monokai-tasty'
 Plug 'connorholyday/vim-snazzy'
 Plug 'chriskempson/tomorrow-theme', {'rtp': '/vim'}
 Plug 'kenwheeler/glow-in-the-dark-gucci-shark-bites-vim'
+Plug 'neovimhaskell/haskell-vim'
 
 call plug#end()
 

@@ -222,7 +222,7 @@ command! Esquiggles e ./squiggles.txt
 map <leader>sq :Esquiggles<cr>
 
 " Terminal exit
-" tnoremap <Esc><Esc> <C-\><C-N>
+" tnoremap <Esc> <C-\><C-N>
 
 " Helper functions
 function! CmdLine(str)
