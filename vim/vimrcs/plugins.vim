@@ -32,6 +32,7 @@ Plug 'michaeljsmith/vim-indent-object'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'kristijanhusak/vim-js-file-import', {'do': 'npm install'}
 Plug 'neoclide/coc.nvim', {'tag': '*', 'branch': 'release'}
+Plug 'neoclide/coc-tsserver', {'do': 'yarn install --frozen-lockfile'}
 Plug 'leafgarland/typescript-vim'
 Plug 'effkay/argonaut.vim'
 Plug 'patstockwell/vim-monokai-tasty'
@@ -39,6 +40,7 @@ Plug 'connorholyday/vim-snazzy'
 Plug 'chriskempson/tomorrow-theme', {'rtp': '/vim'}
 Plug 'kenwheeler/glow-in-the-dark-gucci-shark-bites-vim'
 Plug 'neovimhaskell/haskell-vim'
+Plug 'kaicataldo/material.vim'
 
 call plug#end()
 

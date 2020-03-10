@@ -4,6 +4,7 @@ export LSCOLORS=ExFxCxDxBxegedabagacad
 
 # Add dotfiles to path
 export PATH=$PATH:~/.dotfiles/bin
+export PATH=$PATH:~/.local/bin
 
 # Rbenv Setup
 if hash rbenv 2>/dev/null; then
