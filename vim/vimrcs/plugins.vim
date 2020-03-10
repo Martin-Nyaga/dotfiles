@@ -46,7 +46,9 @@ call plug#end()
 
 " => Colorscheme 
 set background=dark
-colorscheme sharkbites 
+let g:material_terminal_italics = 1
+let g:material_theme_style = 'darker'
+colorscheme material 
 
 " => FZF
 " Add fzf to vim path

@@ -161,35 +161,48 @@ font:
 # If `true`, bold text is drawn using the bright color variants.
 draw_bold_text_with_bright_colors: true
 
-# Colors (Glow In the Dark)
+# Base16 Material Darker 256 - alacritty color config
+# Nate Peterson
 colors:
   # Default colors
   primary:
-    background: '0x1f1f1f'
-    foreground: '0xFFFFFF'
+    background: '0x212121'
+    foreground: '0xeeffff'
 
+  # Colors the cursor will use if `custom_cursor_colors` is true
+  cursor:
+    text: '0x212121'
+    cursor: '0xeeffff'
 
   # Normal colors
   normal:
-   black:   '0x000000'
-   red:     '0xFF5C58'
-   green:   '0x56F856'
-   yellow:  '0xFFFE58'
-   blue:    '0x5EB2F2'
-   magenta: '0xF856B5'
-   cyan:    '0x54F4B4'
-   white:   '0xd0d0d0'
+    black:   '0x212121'
+    red:     '0xf07178'
+    green:   '0xc3e88d'
+    yellow:  '0xffcb6b'
+    blue:    '0x82aaff'
+    magenta: '0xc792ea'
+    cyan:    '0x89ddff'
+    white:   '0xeeffff'
 
   # Bright colors
   bright:
-   black:   '0x000000'
-   red:     '0xFF5C58'
-   green:   '0x56F856'
-   yellow:  '0xFFFE58'
-   blue:    '0x5EB2F2'
-   magenta: '0xF856B5'
-   cyan:    '0x54F4B4'
-   white:   '0xd0d0d0'
+    black:   '0x4a4a4a'
+    red:     '0xf07178'
+    green:   '0xc3e88d'
+    yellow:  '0xffcb6b'
+    blue:    '0x82aaff'
+    magenta: '0xc792ea'
+    cyan:    '0x89ddff'
+    white:   '0xffffff'
+
+  indexed_colors:
+    - { index: 16, color: '0xf78c6c' }
+    - { index: 17, color: '0xff5370' }
+    - { index: 18, color: '0x303030' }
+    - { index: 19, color: '0x353535' }
+    - { index: 20, color: '0xb2ccd6' }
+    - { index: 21, color: '0xeeffff' }
 
 #
 # Any time the BEL code is received, Alacritty "rings" the visual bell. Once
