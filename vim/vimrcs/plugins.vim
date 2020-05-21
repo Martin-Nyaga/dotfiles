@@ -41,6 +41,8 @@ Plug 'chriskempson/tomorrow-theme', {'rtp': '/vim'}
 Plug 'kenwheeler/glow-in-the-dark-gucci-shark-bites-vim'
 Plug 'neovimhaskell/haskell-vim'
 Plug 'kaicataldo/material.vim'
+Plug 'elixir-editors/vim-elixir'
+Plug 'liuchengxu/vista.vim'
 
 call plug#end()
 
@@ -49,11 +51,14 @@ set background=dark
 let g:material_terminal_italics = 1
 let g:material_theme_style = 'darker'
 colorscheme material 
+" Transparent background to blend into terminal
+hi! Normal ctermbg=NONE guibg=NONE
 
 " => FZF
 " Add fzf to vim path
 map <C-F> :GFiles<cr>
-map <C-A> :Buffers<cr>
+map <C-B> :Buffers<cr>
+let g:fzf_preview_window = 'right:50%'
 " Use same colorscheme as vim
 let g:fzf_colors =
 \ { 'fg':      ['fg', 'Normal'],
@@ -71,9 +76,9 @@ let g:fzf_colors =
   \ 'header':  ['fg', 'Comment'] }
 
 " => Vim Pencil for latex  & notes
-let g:pencil#wrapModeDefault = 'soft'
-let g:pencil#conceallevel = 0
-autocmd BufRead,BufNewfile *.tex call pencil#init()
+" let g:pencil#wrapModeDefault = 'soft'
+" let g:pencil#conceallevel = 0
+" autocmd BufRead,BufNewfile *.tex call pencil#init()
 
 " => Rustfmt
 let g:rustfmt_autosave = 1
@@ -82,9 +87,6 @@ let g:rustfmt_autosave = 1
 let g:vimrubocop_keymap = 0
 nmap <Leader>ru :RuboCop<CR>
 nmap <Leader>rf :RuboCop -a -s<CR>
-
-" => TagBar
-nmap <Leader>b :TagbarToggle<CR>
 
 " => Prettier: disable format on save which is too slow
 let g:prettier#autoformat = 0
@@ -113,7 +115,6 @@ inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
 " Use K to show documentation in preview window
 nnoremap <silent> K :call <SID>show_documentation()<CR>
-
 function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
     execute 'h '.expand('<cword>')
@@ -121,3 +122,33 @@ function! s:show_documentation()
     call CocAction('doHover')
   endif
 endfunction
+
+nmap <silent> gd <Plug>(coc-definition)
+" Symbol renaming.
+nmap <leader>rn <Plug>(coc-rename)
+
+" Formatting selected code.
+xmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>f  <Plug>(coc-format-selected)
+
+" Applying codeAction to the selected region.
+" Example: `<leader>aap` for current paragraph
+xmap <leader>a  <Plug>(coc-codeaction-selected)
+nmap <leader>a  <Plug>(coc-codeaction-selected)
+
+" Remap keys for applying codeAction to the current line.
+nmap <leader>ac  <Plug>(coc-codeaction)
+" Apply AutoFix to problem on the current line.
+nmap <leader>qf  <Plug>(coc-fix-current)
+
+
+" => Vista
+" to show position in a file
+let g:vista_default_executive = 'coc'
+let g:vista_fzf_preview = 1
+let g:vista_fzf_preview = ['right:30%']
+let g:vista_icon_indent = ["▸", ""]
+let g:vista#renderer#enable_icon = 1
+nmap <Leader>b :Vista<CR>
+nmap <Leader>t :Vista finder<CR>
+

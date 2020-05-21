@@ -18,6 +18,11 @@ export FZF_DEFAULT_COMMAND='ag --nocolor --ignore node_modules -g ""'
 # Check disk usage
 alias checkdiskusage='du -h -d1 | sort -hr'
 
+# print csv as table
+printcsv() {
+   sed 's/,,/, ,/g;s/,,/, ,/g' $1 | column -s, -t | less -S
+}
+
 # Use vim as editor for react
 export REACT_EDITOR=nvim
 export EDITOR=nvim
