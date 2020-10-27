@@ -34,12 +34,16 @@ set foldmethod=indent
 set so=2
 
 " Change cursor per mode 
-let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
-let &t_SR = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=2\x7\<Esc>\\"
-let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\" 
+" let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
+" let &t_SR = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=2\x7\<Esc>\\"
+" let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\" 
 
 " Highlight line under cursor
 set cursorline
+
+" Limit text width to 78 chars
+set colorcolumn=80
+set textwidth=80
 
 " Turn on the Wild menu
 set wildmenu
@@ -62,6 +66,11 @@ set hlsearch
 
 " Makes search act like search in modern browsers
 set incsearch
+
+" Preview replace commands
+if has("nvim")
+  set inccommand=nosplit
+end
 
 " Don't redraw while executing macros (good performance config)
 set ttyfast

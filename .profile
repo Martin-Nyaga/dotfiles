@@ -7,10 +7,9 @@ export PATH=$PATH:~/.dotfiles/bin
 export PATH=$PATH:~/.local/bin
 
 # Rbenv Setup
-if hash rbenv 2>/dev/null; then
-  export PATH="$HOME/.rbenv/bin:$PATH"
+[ -f ~/.rbenv/bin/rbenv ] &&
+  export PATH="$HOME/.rbenv/bin:$PATH" &&
   eval "$(rbenv init -)"
-fi
 
 # Fzf
 export FZF_DEFAULT_COMMAND='ag --nocolor --ignore node_modules -g ""'

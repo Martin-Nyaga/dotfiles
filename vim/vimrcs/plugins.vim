@@ -51,12 +51,12 @@ set background=dark
 let g:material_terminal_italics = 1
 let g:material_theme_style = 'darker'
 colorscheme material 
-" Transparent background to blend into terminal
+" Transparent background to blend into terminal 
 hi! Normal ctermbg=NONE guibg=NONE
 
 " => FZF
 " Add fzf to vim path
-map <C-F> :GFiles<cr>
+map <C-F> :Files<cr>
 map <C-B> :Buffers<cr>
 let g:fzf_preview_window = 'right:50%'
 " Use same colorscheme as vim
@@ -83,10 +83,11 @@ let g:fzf_colors =
 " => Rustfmt
 let g:rustfmt_autosave = 1
 
-" => RuboCop
+" => RuboCop/RubyFmt
 let g:vimrubocop_keymap = 0
-nmap <Leader>ru :RuboCop<CR>
-nmap <Leader>rf :RuboCop -a -s<CR>
+" nmap <Leader>ru :RuboCop<CR>
+" nmap <Leader>rf :RuboCop -a -s<CR>
+nmap <Leader>ru :!rubyfmt -i %<CR> :e<CR>
 
 " => Prettier: disable format on save which is too slow
 let g:prettier#autoformat = 0
@@ -138,6 +139,8 @@ nmap <leader>a  <Plug>(coc-codeaction-selected)
 
 " Remap keys for applying codeAction to the current line.
 nmap <leader>ac  <Plug>(coc-codeaction)
+" Jump to next error
+nmap <leader>en <Plug>(coc-diagnostic-next-error)
 " Apply AutoFix to problem on the current line.
 nmap <leader>qf  <Plug>(coc-fix-current)
 
