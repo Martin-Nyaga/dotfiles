@@ -5,6 +5,9 @@ set history=10
 filetype plugin on
 filetype indent on
 
+" Enable syntax highlighting
+syntax enable
+
 " Set to auto read when a file is changed from the outside
 set autoread
 
@@ -13,9 +16,6 @@ let mapleader = " "
 
 " Map ; to : for quicker pressing
 nmap ; :
-
-" Fast saving
-nmap <leader>w :w!<cr>
 
 " Full screen zooming
 nmap zi :tab split<cr>
@@ -33,20 +33,16 @@ set foldmethod=indent
 " Set 7 lines to the cursor - when moving vertically using j/k
 set so=2
 
-" Change cursor per mode 
-" let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
-" let &t_SR = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=2\x7\<Esc>\\"
-" let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\" 
-
 " Highlight line under cursor
 set cursorline
 
-" Limit text width to 78 chars
+" Limit text width
 set colorcolumn=80
 set textwidth=80
 
 " Turn on the Wild menu
 set wildmenu
+
 " Ignore files in the wildmenu
 set wildignore=*.o,*~,*.pyc,*/.git/*,*/.hg/*,*/.svn/*,*/.DS_Store
 
@@ -73,19 +69,16 @@ if has("nvim")
 end
 
 " Don't redraw while executing macros (good performance config)
-set ttyfast
+if !has("nvim")
+  set ttyfast
+end
 set lazyredraw
-
-" How long before updating
-set updatetime=300
 
 " For regular expressions turn magic on
 set magic
 
 " Show matching brackets when text indicator is over them
 set showmatch
-" How many tenths of a second to blink when matching brackets
-set mat=2
 
 " No annoying sound on errors
 set noerrorbells
@@ -99,9 +92,6 @@ set diffopt+=vertical
 " Show line numbers
 set number
 
-" Enable syntax highlighting
-syntax enable
-
 " Set utf8 as standard encoding
 set encoding=utf8
 
@@ -110,8 +100,6 @@ set ffs=unix,dos,mac
 
 " Set real colors
 if (has("termguicolors"))
-  set t_8f=[38;2;%lu;%lu;%lum
-  set t_8b=[48;2;%lu;%lu;%lum
   set termguicolors
 endif
 
@@ -126,15 +114,15 @@ set expandtab
 " Be smart when using tabs ;)
 set smarttab
 
-" Relative line numbers
-set relativenumber
-
 " 1 tab == 2 spaces
 set shiftwidth=2
 set tabstop=2
 
-set ai "Auto indent
-set si "Smart indent
+" Relative line numbers
+set relativenumber
+
+set autoindent "Auto indent
+set smartindent "Smart indent
 set wrap "Wrap lines
 
 " Visual mode pressing * or # searches for the current selection
@@ -147,16 +135,6 @@ set mouse=a
 " Return to last edit position when opening files
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 
-" Move a line of text using ALT+[jk] or Command+[jk] on mac
-nnoremap ∆ :m .+1<CR>==
-nnoremap ˚ :m .-2<CR>==
-
-inoremap ∆ <Esc>:m .+1<CR>==gi
-inoremap ˚ <Esc>:m .-2<CR>==gi
-
-vnoremap ∆ :m '>+1<CR>gv=gv
-vnoremap ˚ :m '<-2<CR>gv=gv
-
 " Delete trailing white space on save
 fun! CleanExtraSpaces()
   let save_cursor = getpos(".")
@@ -165,8 +143,6 @@ fun! CleanExtraSpaces()
   call setpos('.', save_cursor)
   call setreg('/', old_query)
 endfun
-
-" Trim whitespace
 autocmd BufWritePre *.rb,*.txt,*.js,*.py,*.wiki,*.sh,*.coffee,*.haml :call CleanExtraSpaces()
 
 " Fast shortcuts for netrw
@@ -184,11 +160,6 @@ try
 catch
 endtry
 
-" Ack searching and cope displaying - Use ripgrep as vimgrep
-if executable('ag')
-	let g:ackprg='ag --vimgrep'
-endif
-
 " When you press gv you Ack after the selected text
 vnoremap <silent> gv :call VisualSelection('gv', '')<CR>
 
@@ -199,7 +170,6 @@ map <leader>g :Ack<space>
 vnoremap <silent> <leader>r :call VisualSelection('replace', '')<CR>
 
 " Do :help cope if you are unsure what cope is. It's super useful!
-"
 " When you search with Ack, display your results in cope by doing:
 "   <leader>cc
 "
@@ -210,7 +180,6 @@ vnoremap <silent> <leader>r :call VisualSelection('replace', '')<CR>
 "   <leader>p
 "
 map <leader>cc :botright cope<cr>
-map <leader>co ggVGy:tabnew<cr>:set syntax=qf<cr>pgg
 map <leader>n :cn<cr>
 map <leader>p :cp<cr>
 
@@ -229,8 +198,9 @@ command! Reload source $MYVIMRC
 command! Esquiggles e ./squiggles.txt
 map <leader>sq :Esquiggles<cr>
 
-" Terminal exit
-" tnoremap <Esc> <C-\><C-N>
+" Add Python support
+" let g:python3_host_prog="$HOME/pythonenv/bin/python"
+" let g:python_host_prog="$HOME/pythonenv/bin/python"
 
 " Helper functions
 function! CmdLine(str)
@@ -253,10 +223,3 @@ function! VisualSelection(direction, extra_filter) range
   let @/ = l:pattern
   let @" = l:saved_reg
 endfunction
-
-" JSON comments
-autocmd FileType json syntax match Comment +\/\/.\+$+
-
-" Python support
-let g:python3_host_prog="$HOME/pythonenv/bin/python"
-let g:python_host_prog="$HOME/pythonenv/bin/python"

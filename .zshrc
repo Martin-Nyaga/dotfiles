@@ -103,5 +103,3 @@ source $ZSH/oh-my-zsh.sh
 
 # Load bash/zsh compatible custom settings
 source $HOME/.dotfiles/.profile
-
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

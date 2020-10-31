@@ -29,9 +29,6 @@ export EDITOR=nvim
 # Use neovim as default vim
 alias vim='nvim'
 
-# TMUX
-# alias tmux='tmux -2'
-
 # Common Projects
 alias cdd='cd $HOME/.dotfiles'
 alias cddotfiles='cd $HOME/.dotfiles'
@@ -46,9 +43,6 @@ if hash exa 2>/dev/null; then
   alias ll='exa -l'
   alias lll='exa -al'
 fi
-
-# Source tree
-alias gitgui='open -a Sourcetree.app'
 
 # LESS
 export LESS='--RAW-CONTROL-CHARS'

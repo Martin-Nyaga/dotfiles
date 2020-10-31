@@ -1,50 +1,57 @@
 " Load Plugins
 call plug#begin('~/.vim/plugins')
 
-Plug 'vim-ruby/vim-ruby'
+" Navigation
 Plug 'mileszs/ack.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'Martin-Nyaga/vim-vinegar'
+Plug 'airblade/vim-rooter'
+Plug 'christoomey/vim-tmux-navigator'
+
+" Editing
 Plug 'godlygeek/tabular'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
-Plug 'pangloss/vim-javascript'
-Plug 'maxmellon/vim-jsx-pretty'
 Plug 'tpope/vim-repeat'
-Plug 'mattn/emmet-vim'
-Plug 'prettier/vim-prettier'
-Plug 'ap/vim-css-color'
-Plug 'airblade/vim-gitgutter'
-Plug 'tpope/vim-fugitive'
 Plug 'adelarsq/vim-matchit'
-Plug 'ecomba/vim-ruby-refactoring'
-Plug 'tpope/vim-endwise'
 Plug 'tmsvg/pear-tree'
-Plug 'airblade/vim-rooter'
-Plug 'rust-lang/rust.vim'
-Plug 'Martin-Nyaga/vim-rubocop'
-Plug 'aliou/sql-heredoc.vim'
-Plug 'tpope/vim-rails'
-Plug 'mhinz/vim-startify'
 Plug 'terryma/vim-expand-region'
 Plug 'michaeljsmith/vim-indent-object'
-Plug 'christoomey/vim-tmux-navigator'
-Plug 'kristijanhusak/vim-js-file-import', {'do': 'npm install'}
+
+" External tooling integration
+Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
+Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-fugitive'
+
+" Language agnostic features
 Plug 'neoclide/coc.nvim', {'tag': '*', 'branch': 'release'}
-Plug 'neoclide/coc-tsserver', {'do': 'yarn install --frozen-lockfile'}
-Plug 'leafgarland/typescript-vim'
-Plug 'effkay/argonaut.vim'
-Plug 'patstockwell/vim-monokai-tasty'
-Plug 'connorholyday/vim-snazzy'
-Plug 'chriskempson/tomorrow-theme', {'rtp': '/vim'}
-Plug 'kenwheeler/glow-in-the-dark-gucci-shark-bites-vim'
-Plug 'neovimhaskell/haskell-vim'
-Plug 'kaicataldo/material.vim'
-Plug 'elixir-editors/vim-elixir'
 Plug 'liuchengxu/vista.vim'
 
+" Language-specific features
+Plug 'pangloss/vim-javascript'
+Plug 'maxmellon/vim-jsx-pretty'
+Plug 'ap/vim-css-color'
+Plug 'elixir-editors/vim-elixir'
+Plug 'leafgarland/typescript-vim'
+Plug 'neovimhaskell/haskell-vim'
+Plug 'rust-lang/rust.vim'
+Plug 'tpope/vim-rails'
+Plug 'aliou/sql-heredoc.vim'
+
+" Themes
+Plug 'chriskempson/tomorrow-theme', {'rtp': '/vim'}
+Plug 'kaicataldo/material.vim'
+
 call plug#end()
+
+" => Ack.vim 
+" Try use rg or ag instead of ack for searching
+if executable('rg')
+	let g:ackprg='rg --vimgrep'
+elseif executable('ag')
+	let g:ackprg='ag --vimgrep'
+endif
 
 " => Colorscheme 
 set background=dark
@@ -54,8 +61,14 @@ colorscheme material
 " Transparent background to blend into terminal 
 hi! Normal ctermbg=NONE guibg=NONE
 
+" => Pear tree
+" Balance brackets
+let g:pear_tree_smart_openers = 1
+let g:pear_tree_smart_closers = 1
+let g:pear_tree_smart_backspace = 1
+let g:pear_tree_timeout = 15
+
 " => FZF
-" Add fzf to vim path
 map <C-F> :Files<cr>
 map <C-B> :Buffers<cr>
 let g:fzf_preview_window = 'right:50%'
@@ -75,26 +88,33 @@ let g:fzf_colors =
   \ 'spinner': ['fg', 'Label'],
   \ 'header':  ['fg', 'Comment'] }
 
-" => Vim Pencil for latex  & notes
-" let g:pencil#wrapModeDefault = 'soft'
-" let g:pencil#conceallevel = 0
-" autocmd BufRead,BufNewfile *.tex call pencil#init()
-
 " => Rustfmt
 let g:rustfmt_autosave = 1
 
-" => RuboCop/RubyFmt
-let g:vimrubocop_keymap = 0
-" nmap <Leader>ru :RuboCop<CR>
-" nmap <Leader>rf :RuboCop -a -s<CR>
-nmap <Leader>ru :!rubyfmt -i %<CR> :e<CR>
+" => RubyFmt
+if executable("rubyfmt")
+  nmap <Leader>ru :!rubyfmt -i %<CR> :e<CR>
+end
+
+" => Tmux vim navigation
+" Make Netrw C-l work
+augroup netrw_mapping
+  autocmd!
+  autocmd filetype netrw call NetrwMapping()
+augroup END
+function! NetrwMapping()
+  nnoremap <silent> <buffer> <c-l> :TmuxNavigateRight<CR>
+endfunction
 
 " => Prettier: disable format on save which is too slow
 let g:prettier#autoformat = 0
 nnoremap <Leader>p :Prettier<CR>
 
-" => JS File import
-let g:js_file_import_sort_after_insert = 1
+" => Vim Javascript - better js folding
+augroup javascript_folding
+  au!
+  au FileType javascript setlocal foldmethod=syntax
+augroup END
 
 " => COC.nvim
 " Use tab for trigger completion with characters ahead and navigate.
@@ -125,25 +145,25 @@ function! s:show_documentation()
 endfunction
 
 nmap <silent> gd <Plug>(coc-definition)
+
 " Symbol renaming.
 nmap <leader>rn <Plug>(coc-rename)
 
 " Formatting selected code.
-xmap <leader>f  <Plug>(coc-format-selected)
 nmap <leader>f  <Plug>(coc-format-selected)
 
 " Applying codeAction to the selected region.
 " Example: `<leader>aap` for current paragraph
-xmap <leader>a  <Plug>(coc-codeaction-selected)
 nmap <leader>a  <Plug>(coc-codeaction-selected)
 
 " Remap keys for applying codeAction to the current line.
 nmap <leader>ac  <Plug>(coc-codeaction)
+
 " Jump to next error
 nmap <leader>en <Plug>(coc-diagnostic-next-error)
+
 " Apply AutoFix to problem on the current line.
 nmap <leader>qf  <Plug>(coc-fix-current)
-
 
 " => Vista
 " to show position in a file
@@ -154,4 +174,3 @@ let g:vista_icon_indent = ["▸", ""]
 let g:vista#renderer#enable_icon = 1
 nmap <Leader>b :Vista<CR>
 nmap <Leader>t :Vista finder<CR>
-
