@@ -18,6 +18,8 @@ Plug 'adelarsq/vim-matchit'
 Plug 'tmsvg/pear-tree'
 Plug 'terryma/vim-expand-region'
 Plug 'michaeljsmith/vim-indent-object'
+Plug 'justinmk/vim-sneak'
+Plug 'editorconfig/editorconfig-vim'
 
 " External tooling integration
 Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
@@ -25,23 +27,29 @@ Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
 
 " Language agnostic features
-Plug 'neoclide/coc.nvim', {'tag': '*', 'branch': 'release'}
+Plug 'neoclide/coc.nvim', {'branch': 'master', 'do': 'yarn install --frozen-lockfile'}
 Plug 'liuchengxu/vista.vim'
 
 " Language-specific features
 Plug 'pangloss/vim-javascript'
+Plug 'leafgarland/typescript-vim'
 Plug 'maxmellon/vim-jsx-pretty'
 Plug 'ap/vim-css-color'
 Plug 'elixir-editors/vim-elixir'
 Plug 'leafgarland/typescript-vim'
 Plug 'neovimhaskell/haskell-vim'
 Plug 'rust-lang/rust.vim'
+Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-rails'
+Plug 'tpope/vim-rake'
+Plug 'ngmy/vim-rubocop'
 Plug 'aliou/sql-heredoc.vim'
 
 " Themes
-Plug 'chriskempson/tomorrow-theme', {'rtp': '/vim'}
 Plug 'kaicataldo/material.vim'
+Plug 'itchyny/lightline.vim'
+Plug 'chriskempson/base16-vim'
+Plug 'shinchu/lightline-gruvbox.vim'
 
 call plug#end()
 
@@ -55,11 +63,22 @@ endif
 
 " => Colorscheme 
 set background=dark
-let g:material_terminal_italics = 1
-let g:material_theme_style = 'darker'
-colorscheme material 
+if filereadable(expand("~/.vimrc_background"))
+  let base16colorspace=256
+  source ~/.vimrc_background
+  let g:base16_shell_path='~/.config/base16-shell/scripts/'
+else
+  colorscheme base16-gruvbox-dark-hard
+endif
+
+" Brighter comments & whiter text
+call Base16hi("Comment", g:base16_gui09, "", g:base16_cterm09, "", "", "")
+call Base16hi("Normal", g:base16_gui07, "", g:base16_cterm07, "", "", "")
+
 " Transparent background to blend into terminal 
-hi! Normal ctermbg=NONE guibg=NONE
+" if !exists('g:fvim_loaded')
+"   hi! Normal ctermbg=NONE guibg=NONE
+" end
 
 " => Pear tree
 " Balance brackets
@@ -72,6 +91,7 @@ let g:pear_tree_timeout = 15
 map <C-F> :Files<cr>
 map <C-B> :Buffers<cr>
 let g:fzf_preview_window = 'right:50%'
+let g:fzf_layout = { 'down': '40%' }
 " Use same colorscheme as vim
 let g:fzf_colors =
 \ { 'fg':      ['fg', 'Normal'],
@@ -87,6 +107,8 @@ let g:fzf_colors =
   \ 'marker':  ['fg', 'Keyword'],
   \ 'spinner': ['fg', 'Label'],
   \ 'header':  ['fg', 'Comment'] }
+command! -bang -nargs=? -complete=dir Files
+    \ call fzf#vim#files(<q-args>, fzf#vim#with_preview({'options': ['--info=inline']}), <bang>0)
 
 " => Rustfmt
 let g:rustfmt_autosave = 1
@@ -95,6 +117,10 @@ let g:rustfmt_autosave = 1
 if executable("rubyfmt")
   nmap <Leader>ru :!rubyfmt -i %<CR> :e<CR>
 end
+
+" => Rubocop
+" Disable keymap to avoid clashing with rubyfmt
+let g:vimrubocop_keymap = 0
 
 " => Tmux vim navigation
 " Make Netrw C-l work
@@ -108,7 +134,7 @@ endfunction
 
 " => Prettier: disable format on save which is too slow
 let g:prettier#autoformat = 0
-nnoremap <Leader>p :Prettier<CR>
+nnoremap <Leader>p :PrettierAsync<CR>
 
 " => Vim Javascript - better js folding
 augroup javascript_folding
@@ -144,13 +170,21 @@ function! s:show_documentation()
   endif
 endfunction
 
-nmap <silent> gd <Plug>(coc-definition)
+nmap <silent>gd <Plug>(coc-definition)
 
 " Symbol renaming.
 nmap <leader>rn <Plug>(coc-rename)
 
 " Formatting selected code.
+xmap <leader>f  <Plug>(coc-format-selected)
 nmap <leader>f  <Plug>(coc-format-selected)
+
+" Add `:Format` command to format current buffer.
+command! -nargs=0 Format :call CocAction('format')
+
+augroup format_on_save
+  autocmd BufWritePost *.cpp :call CocAction('format')
+augroup END
 
 " Applying codeAction to the selected region.
 " Example: `<leader>aap` for current paragraph
@@ -165,12 +199,25 @@ nmap <leader>en <Plug>(coc-diagnostic-next-error)
 " Apply AutoFix to problem on the current line.
 nmap <leader>qf  <Plug>(coc-fix-current)
 
-" => Vista
-" to show position in a file
+"=> Vista
 let g:vista_default_executive = 'coc'
-let g:vista_fzf_preview = 1
-let g:vista_fzf_preview = ['right:30%']
-let g:vista_icon_indent = ["▸", ""]
-let g:vista#renderer#enable_icon = 1
-nmap <Leader>b :Vista<CR>
-nmap <Leader>t :Vista finder<CR>
+let g:vista_icon_indent = ["╰─▸ ", "├─▸ "]
+function! NearestMethodOrFunction() abort
+  return get(b:, 'vista_nearest_method_or_function', '')
+endfunction
+" If you want to show the nearest function in your statusline automatically,
+" you can add the following line to your vimrc
+autocmd VimEnter * call vista#RunForNearestMethodOrFunction()
+
+" => Lightline
+let g:lightline = {
+      \ 'colorscheme': 'gruvbox',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'gitbranch', 'readonly', 'filename', 'modified', 'method' ] ]
+      \ },
+      \ 'component_function': {
+      \   'gitbranch': 'FugitiveHead',
+      \   'method': 'NearsetMethodOrFunction'
+      \ },
+      \ }

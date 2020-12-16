@@ -9,7 +9,6 @@ source ~/.vim/vimrcs/main.vim
 source ~/.vim/vimrcs/plugins.vim
 
 set runtimepath+=~/.vim/after
-set runtimepath+=~/.vim/plugin
 ' > ~/.vimrc
 ln -sf ~/.vimrc ~/.config/nvim/init.vim
 

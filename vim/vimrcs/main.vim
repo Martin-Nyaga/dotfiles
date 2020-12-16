@@ -34,7 +34,7 @@ set foldmethod=indent
 set so=2
 
 " Highlight line under cursor
-set cursorline
+" set cursorline
 
 " Limit text width
 set colorcolumn=80
@@ -132,6 +132,9 @@ vnoremap <silent> # :<C-u>call VisualSelection('', '')<CR>?<C-R>=@/<CR><CR>
 " Allow mouse support - useful for copy paste
 set mouse=a
 
+" Statusline
+set laststatus=2
+
 " Return to last edit position when opening files
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 
@@ -180,8 +183,8 @@ vnoremap <silent> <leader>r :call VisualSelection('replace', '')<CR>
 "   <leader>p
 "
 map <leader>cc :botright cope<cr>
-map <leader>n :cn<cr>
-map <leader>p :cp<cr>
+map <leader>cn :cn<cr>
+map <leader>cp :cp<cr>
 
 " Only show tabline if there is more than one tab
 set showtabline=1
@@ -223,3 +226,26 @@ function! VisualSelection(direction, extra_filter) range
   let @/ = l:pattern
   let @" = l:saved_reg
 endfunction
+
+" Gui specific settings (windows - FVim)
+if exists('g:fvim_loaded')
+  " good old 'set guifont' compatibility
+  set guifont=Cascadia\ Mono:h15
+  " Ctrl-ScrollWheel for zooming in/out
+  nnoremap <silent> <C-ScrollWheelUp> :set guifont=+<CR>
+  nnoremap <silent> <C-ScrollWheelDown> :set guifont=-<CR>
+  nnoremap <A-CR> :FVimToggleFullScreen<CR>
+  FVimFontLigature v:true
+  FVimFontAutohint v:true
+  FVimFontHintLevel 'normal'
+  FVimFontSubpixel v:true
+  FVimFontAntialias v:true
+  FVimFontAutoSnap v:true
+
+  FVimFontNormalWeight 350
+  FVimFontLineHeight '+1.0'
+
+  FVimBackgroundComposition 'blur'
+  FVimBackgroundOpacity 0.95
+endif
+

@@ -98,8 +98,7 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-# FZF
-[ -f $HOME/.fzf.zsh ] && source $HOME/.fzf.zsh
-
 # Load bash/zsh compatible custom settings
 source $HOME/.dotfiles/.profile
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

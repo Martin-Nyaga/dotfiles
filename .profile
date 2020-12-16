@@ -47,5 +47,21 @@ fi
 # LESS
 export LESS='--RAW-CONTROL-CHARS'
 
+# ZSH autosuggestions
+[ -f /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh ] && source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+# FZF
+[ -f $HOME/.fzf.zsh ] && source $HOME/.fzf.zsh
+
+# Base16 Shell
+BASE16_SHELL="$HOME/.config/base16-shell/"
+[ -n "$PS1" ] && \
+  [ -s "$BASE16_SHELL/profile_helper.sh" ] && \
+  eval "$("$BASE16_SHELL/profile_helper.sh")"
+
 # Platform specific settings
 [ -f ~/.dotfiles/.profile.extra ] && source ~/.dotfiles/.profile.extra
+
+# GPG
+export GPG_TTY=$(tty)
+

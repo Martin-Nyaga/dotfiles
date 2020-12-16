@@ -28,6 +28,10 @@ setup_oh_my_zsh() {
   ln -sf ~/.dotfiles/oh-my-zsh-custom $ZSH/custom
 }
 
+setup_base16() {
+  git clone https://github.com/chriskempson/base16-shell.git ~/.config/base16-shell
+}
+
 setup_tmux () {
   echo 'Setting up tmux...'
   ln -sf ~/.dotfiles/.tmux.conf ~/.tmux.conf
