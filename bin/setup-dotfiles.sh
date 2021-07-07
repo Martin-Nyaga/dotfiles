@@ -53,6 +53,7 @@ setup_bash_profile
 setup_oh_my_zsh
 setup_tmux
 setup_alacritty
+setup_base16
 list_todos
 
 echo "Done"

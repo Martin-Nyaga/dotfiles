@@ -59,6 +59,9 @@ BASE16_SHELL="$HOME/.config/base16-shell/"
   [ -s "$BASE16_SHELL/profile_helper.sh" ] && \
   eval "$("$BASE16_SHELL/profile_helper.sh")"
 
+# Base 16 Theme
+base16_material-darker
+
 # Platform specific settings
 [ -f ~/.dotfiles/.profile.extra ] && source ~/.dotfiles/.profile.extra
 
