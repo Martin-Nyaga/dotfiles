@@ -22,34 +22,31 @@ Plug 'justinmk/vim-sneak'
 Plug 'editorconfig/editorconfig-vim'
 
 " External tooling integration
-Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
+Plug 'sbdchd/neoformat'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
 
 " Language agnostic features
 Plug 'neoclide/coc.nvim', {'branch': 'master', 'do': 'yarn install --frozen-lockfile'}
 Plug 'liuchengxu/vista.vim'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate' } 
 
 " Language-specific features
-Plug 'pangloss/vim-javascript'
-Plug 'leafgarland/typescript-vim'
-Plug 'maxmellon/vim-jsx-pretty'
 Plug 'ap/vim-css-color'
-Plug 'elixir-editors/vim-elixir'
-Plug 'leafgarland/typescript-vim'
-Plug 'neovimhaskell/haskell-vim'
-Plug 'rust-lang/rust.vim'
 Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-rails'
 Plug 'tpope/vim-rake'
 Plug 'ngmy/vim-rubocop'
 Plug 'aliou/sql-heredoc.vim'
+Plug 'rust-lang/rust.vim'
 
 " Themes
 Plug 'kaicataldo/material.vim'
 Plug 'itchyny/lightline.vim'
 Plug 'chriskempson/base16-vim'
 Plug 'shinchu/lightline-gruvbox.vim'
+Plug 'pineapplegiant/spaceduck', { 'branch': 'main' }
+Plug 'tiagovla/tokyodark.nvim'
 
 call plug#end()
 
@@ -73,12 +70,10 @@ endif
 
 " Brighter comments & whiter text
 call Base16hi("Comment", g:base16_gui09, "", g:base16_cterm09, "", "", "")
-call Base16hi("Normal", g:base16_gui07, "", g:base16_cterm07, "", "", "")
+" call Base16hi("Normal", g:base16_gui07, "", g:base16_cterm07, "", "", "")
 
-" Transparent background to blend into terminal 
-" if !exists('g:fvim_loaded')
-"   hi! Normal ctermbg=NONE guibg=NONE
-" end
+" Italic comments
+" highlight Comment cterm=italic gui=italic
 
 " => Pear tree
 " Balance brackets
@@ -132,16 +127,6 @@ function! NetrwMapping()
   nnoremap <silent> <buffer> <c-l> :TmuxNavigateRight<CR>
 endfunction
 
-" => Prettier: disable format on save which is too slow
-let g:prettier#autoformat = 0
-nnoremap <Leader>p :PrettierAsync<CR>
-
-" => Vim Javascript - better js folding
-augroup javascript_folding
-  au!
-  au FileType javascript setlocal foldmethod=syntax
-augroup END
-
 " => COC.nvim
 " Use tab for trigger completion with characters ahead and navigate.
 " Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
@@ -183,7 +168,7 @@ nmap <leader>f  <Plug>(coc-format-selected)
 command! -nargs=0 Format :call CocAction('format')
 
 augroup format_on_save
-  autocmd BufWritePost *.cpp :call CocAction('format')
+  autocmd BufWritePost *.cpp,*.h :call CocAction('format')
 augroup END
 
 " Applying codeAction to the selected region.
@@ -195,6 +180,7 @@ nmap <leader>ac  <Plug>(coc-codeaction)
 
 " Jump to next error
 nmap <leader>en <Plug>(coc-diagnostic-next-error)
+nmap <leader>wn <Plug>(coc-diagnostic-next)
 
 " Apply AutoFix to problem on the current line.
 nmap <leader>qf  <Plug>(coc-fix-current)
@@ -202,22 +188,31 @@ nmap <leader>qf  <Plug>(coc-fix-current)
 "=> Vista
 let g:vista_default_executive = 'coc'
 let g:vista_icon_indent = ["╰─▸ ", "├─▸ "]
-function! NearestMethodOrFunction() abort
-  return get(b:, 'vista_nearest_method_or_function', '')
-endfunction
-" If you want to show the nearest function in your statusline automatically,
-" you can add the following line to your vimrc
-autocmd VimEnter * call vista#RunForNearestMethodOrFunction()
 
 " => Lightline
 let g:lightline = {
-      \ 'colorscheme': 'gruvbox',
+      \ 'colorscheme': 'wombat',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
       \             [ 'gitbranch', 'readonly', 'filename', 'modified', 'method' ] ]
       \ },
       \ 'component_function': {
       \   'gitbranch': 'FugitiveHead',
-      \   'method': 'NearsetMethodOrFunction'
       \ },
       \ }
+
+" => Treesitter
+lua <<EOF
+require'nvim-treesitter.configs'.setup {
+  ensure_installed = "maintained",
+  highlight = {
+    enable = true,
+  },
+  indent = {
+    enable = true
+  }
+}
+EOF
+
+" => Neoformat
+nnoremap <Leader>p :Neoformat<CR>

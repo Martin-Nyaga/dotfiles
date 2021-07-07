@@ -4,7 +4,7 @@ set -e
 cd ~/.vim
 
 # Set up neovim runtime env
-VIMRUNTIME=$USERPROFILE/AppData/Local/.vim
+VIMRUNTIME=$USERPROFILE/.vim
 
 WIN_USERPROFILE=`wslpath -w $USERPROFILE`
 WIN_VIMRUNTIME=`wslpath -w $VIMRUNTIME`

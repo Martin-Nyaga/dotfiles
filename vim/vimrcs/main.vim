@@ -155,6 +155,9 @@ map <leader>nf :Explore<cr>
 " Pressing <leader>ss will toggle and untoggle spell checking
 map <leader>ss :setlocal spell!<cr>
 
+" <shift-Z> to add newline
+nnoremap Z a<CR><ESC>k$
+
 " Turn persistent undo on
 " means that you can undo even when you close a buffer/VIM
 try
@@ -227,25 +230,8 @@ function! VisualSelection(direction, extra_filter) range
   let @" = l:saved_reg
 endfunction
 
-" Gui specific settings (windows - FVim)
-if exists('g:fvim_loaded')
-  " good old 'set guifont' compatibility
-  set guifont=Cascadia\ Mono:h15
-  " Ctrl-ScrollWheel for zooming in/out
-  nnoremap <silent> <C-ScrollWheelUp> :set guifont=+<CR>
-  nnoremap <silent> <C-ScrollWheelDown> :set guifont=-<CR>
-  nnoremap <A-CR> :FVimToggleFullScreen<CR>
-  FVimFontLigature v:true
-  FVimFontAutohint v:true
-  FVimFontHintLevel 'normal'
-  FVimFontSubpixel v:true
-  FVimFontAntialias v:true
-  FVimFontAutoSnap v:true
-
-  FVimFontNormalWeight 350
-  FVimFontLineHeight '+1.0'
-
-  FVimBackgroundComposition 'blur'
-  FVimBackgroundOpacity 0.95
+" Add node_modules binaries to vim path
+if isdirectory($PWD .'/node_modules')
+  let $PATH .= ':' . $PWD . '/node_modules/.bin'
 endif
 

@@ -55,7 +55,7 @@ export LESS='--RAW-CONTROL-CHARS'
 
 # Base16 Shell
 BASE16_SHELL="$HOME/.config/base16-shell/"
-[ -n "$PS1" ] && \
+  [ -n "$PS1" ] && \
   [ -s "$BASE16_SHELL/profile_helper.sh" ] && \
   eval "$("$BASE16_SHELL/profile_helper.sh")"
 
@@ -64,4 +64,7 @@ BASE16_SHELL="$HOME/.config/base16-shell/"
 
 # GPG
 export GPG_TTY=$(tty)
+
+# Direnv
+hash direnv 2>/dev/null && eval "$(direnv hook zsh)"
 
