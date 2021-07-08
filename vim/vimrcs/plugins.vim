@@ -73,7 +73,7 @@ call Base16hi("Comment", g:base16_gui09, "", g:base16_cterm09, "", "", "")
 " call Base16hi("Normal", g:base16_gui07, "", g:base16_cterm07, "", "", "")
 
 " Italic comments
-" highlight Comment cterm=italic gui=italic
+highlight Comment cterm=italic gui=italic
 
 " => Pear tree
 " Balance brackets
