@@ -102,6 +102,9 @@ set ffs=unix,dos,mac
 if (has("termguicolors"))
   set termguicolors
 endif
+if !has('gui_running')
+  set t_Co=256
+endif
 
 " Turn backup off, since most stuff is in git anyway...
 set nobackup

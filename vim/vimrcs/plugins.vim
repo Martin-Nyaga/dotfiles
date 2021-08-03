@@ -40,13 +40,12 @@ Plug 'ngmy/vim-rubocop'
 Plug 'aliou/sql-heredoc.vim'
 Plug 'rust-lang/rust.vim'
 
-" Themes
-Plug 'kaicataldo/material.vim'
+" Statusbar
 Plug 'itchyny/lightline.vim'
-Plug 'chriskempson/base16-vim'
 Plug 'shinchu/lightline-gruvbox.vim'
-Plug 'pineapplegiant/spaceduck', { 'branch': 'main' }
-Plug 'tiagovla/tokyodark.nvim'
+
+" Themes
+Plug 'fnune/base16-vim'
 
 call plug#end()
 
@@ -59,16 +58,15 @@ elseif executable('ag')
 endif
 
 " => Colorscheme 
-set background=dark
+set background=light
 if filereadable(expand("~/.vimrc_background"))
   let base16colorspace=256
   source ~/.vimrc_background
-  let g:base16_shell_path='~/.config/base16-shell/scripts/'
 else
   colorscheme base16-gruvbox-dark-hard
 endif
 
-" Brighter comments & whiter text
+" Brighter comments & whiter text for base16 themes
 call Base16hi("Comment", g:base16_gui09, "", g:base16_cterm09, "", "", "")
 " call Base16hi("Normal", g:base16_gui07, "", g:base16_cterm07, "", "", "")
 
@@ -155,7 +153,8 @@ function! s:show_documentation()
   endif
 endfunction
 
-nmap <silent>gd <Plug>(coc-definition)
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gr <Plug>(coc-references)
 
 " Symbol renaming.
 nmap <leader>rn <Plug>(coc-rename)
@@ -191,7 +190,7 @@ let g:vista_icon_indent = ["╰─▸ ", "├─▸ "]
 
 " => Lightline
 let g:lightline = {
-      \ 'colorscheme': 'wombat',
+      \ 'colorscheme': 'one',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
       \             [ 'gitbranch', 'readonly', 'filename', 'modified', 'method' ] ]
@@ -216,3 +215,5 @@ EOF
 
 " => Neoformat
 nnoremap <Leader>p :Neoformat<CR>
+let g:neoformat_enabled_typescript = ['prettier']
+let g:neoformat_enabled_javascript = ['prettier']
