@@ -46,6 +46,7 @@ Plug 'shinchu/lightline-gruvbox.vim'
 
 " Themes
 Plug 'fnune/base16-vim'
+Plug 'Shatur/neovim-ayu'
 
 call plug#end()
 
@@ -58,16 +59,18 @@ elseif executable('ag')
 endif
 
 " => Colorscheme 
-set background=light
-if filereadable(expand("~/.vimrc_background"))
-  let base16colorspace=256
-  source ~/.vimrc_background
-else
-  colorscheme base16-gruvbox-dark-hard
-endif
+set background=dark
+colorscheme ayu
+
+" if filereadable(expand("~/.vimrc_background"))
+"   let base16colorspace=256
+"   source ~/.vimrc_background
+" else
+"   colorscheme base16-gruvbox-dark-hard
+" endif
 
 " Brighter comments & whiter text for base16 themes
-call Base16hi("Comment", g:base16_gui09, "", g:base16_cterm09, "", "", "")
+" call Base16hi("Comment", g:base16_gui09, "", g:base16_cterm09, "", "", "")
 " call Base16hi("Normal", g:base16_gui07, "", g:base16_cterm07, "", "", "")
 
 " Italic comments
@@ -190,7 +193,7 @@ let g:vista_icon_indent = ["╰─▸ ", "├─▸ "]
 
 " => Lightline
 let g:lightline = {
-      \ 'colorscheme': 'one',
+      \ 'colorscheme': 'powerline',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
       \             [ 'gitbranch', 'readonly', 'filename', 'modified', 'method' ] ]
@@ -199,6 +202,14 @@ let g:lightline = {
       \   'gitbranch': 'FugitiveHead',
       \ },
       \ }
+
+command! LightlineReload call LightlineReload()
+
+function! LightlineReload()
+  call lightline#init()
+  call lightline#colorscheme()
+  call lightline#update()
+endfunction
 
 " => Treesitter
 lua <<EOF
@@ -217,3 +228,6 @@ EOF
 nnoremap <Leader>p :Neoformat<CR>
 let g:neoformat_enabled_typescript = ['prettier']
 let g:neoformat_enabled_javascript = ['prettier']
+
+" => Rails
+nmap <C-a> :A<cr>

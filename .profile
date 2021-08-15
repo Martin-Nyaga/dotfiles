@@ -45,7 +45,7 @@ if hash exa 2>/dev/null; then
 fi
 
 # LESS
-export LESS='--RAW-CONTROL-CHARS'
+export LESS='-RQ'
 
 # ZSH autosuggestions
 [ -f /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh ] && source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh

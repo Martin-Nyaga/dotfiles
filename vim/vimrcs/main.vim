@@ -34,7 +34,7 @@ set foldmethod=indent
 set so=2
 
 " Highlight line under cursor
-" set cursorline
+set cursorline
 
 " Limit text width
 set colorcolumn=80
@@ -99,9 +99,7 @@ set encoding=utf8
 set ffs=unix,dos,mac
 
 " Set real colors
-if (has("termguicolors"))
-  set termguicolors
-endif
+set termguicolors
 if !has('gui_running')
   set t_Co=256
 endif
