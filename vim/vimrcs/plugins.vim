@@ -6,7 +6,6 @@ Plug 'mileszs/ack.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'Martin-Nyaga/vim-vinegar'
-Plug 'airblade/vim-rooter'
 Plug 'christoomey/vim-tmux-navigator'
 
 " Editing
@@ -186,6 +185,9 @@ nmap <leader>wn <Plug>(coc-diagnostic-next)
 
 " Apply AutoFix to problem on the current line.
 nmap <leader>qf  <Plug>(coc-fix-current)
+
+" Highlight the symbol and its references when holding the cursor.
+autocmd CursorHold * silent call CocActionAsync('highlight')
 
 "=> Vista
 let g:vista_default_executive = 'coc'

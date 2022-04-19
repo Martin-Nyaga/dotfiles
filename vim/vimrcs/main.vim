@@ -205,6 +205,10 @@ command! Reload source $MYVIMRC
 command! Esquiggles e ./squiggles.txt
 map <leader>sq :Esquiggles<cr>
 
+" Emerald files 
+autocmd BufNewFile,BufRead *.em set filetype=emerald
+autocmd FileType emerald setlocal commentstring=#\ %s
+
 " Add Python support
 " let g:python3_host_prog="$HOME/pythonenv/bin/python"
 " let g:python_host_prog="$HOME/pythonenv/bin/python"
