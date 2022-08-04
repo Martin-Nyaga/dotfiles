@@ -216,7 +216,7 @@ endfunction
 " => Treesitter
 lua <<EOF
 require'nvim-treesitter.configs'.setup {
-  ensure_installed = "maintained",
+  ensure_installed = { "c", "cpp", "make", "ruby", "javascript", "typescript", "python", "rust", "json", "jsdoc", "html", "vim" },
   highlight = {
     enable = true,
   },
