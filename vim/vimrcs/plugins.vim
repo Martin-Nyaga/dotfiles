@@ -24,28 +24,39 @@ Plug 'editorconfig/editorconfig-vim'
 Plug 'sbdchd/neoformat'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
+Plug 'samoshkin/vim-mergetool'
+Plug 'AndrewRadev/diffurcate.vim'
 
 " Language agnostic features
-Plug 'neoclide/coc.nvim', {'branch': 'master', 'do': 'yarn install --frozen-lockfile'}
+Plug 'neovim/nvim-lspconfig'
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/cmp-path'
+Plug 'hrsh7th/cmp-cmdline'
+Plug 'hrsh7th/nvim-cmp'
+Plug 'L3MON4D3/LuaSnip'
+
 Plug 'liuchengxu/vista.vim'
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate' } 
+Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' } 
 
 " Language-specific features
-Plug 'ap/vim-css-color'
 Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-rails'
 Plug 'tpope/vim-rake'
 Plug 'ngmy/vim-rubocop'
 Plug 'aliou/sql-heredoc.vim'
 Plug 'rust-lang/rust.vim'
+Plug 'jlcrochet/vim-rbs'
 
 " Statusbar
 Plug 'itchyny/lightline.vim'
 Plug 'shinchu/lightline-gruvbox.vim'
+call plug#end()
 
 " Themes
 Plug 'fnune/base16-vim'
 Plug 'Shatur/neovim-ayu'
+Plug 'rcarriga/nvim-notify'
 
 call plug#end()
 
@@ -127,70 +138,7 @@ function! NetrwMapping()
   nnoremap <silent> <buffer> <c-l> :TmuxNavigateRight<CR>
 endfunction
 
-" => COC.nvim
-" Use tab for trigger completion with characters ahead and navigate.
-" Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
-
-" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
-" Coc only does snippet and additional edit on confirm.
-inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-
-" Use K to show documentation in preview window
-nnoremap <silent> K :call <SID>show_documentation()<CR>
-function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  else
-    call CocAction('doHover')
-  endif
-endfunction
-
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gr <Plug>(coc-references)
-
-" Symbol renaming.
-nmap <leader>rn <Plug>(coc-rename)
-
-" Formatting selected code.
-xmap <leader>f  <Plug>(coc-format-selected)
-nmap <leader>f  <Plug>(coc-format-selected)
-
-" Add `:Format` command to format current buffer.
-command! -nargs=0 Format :call CocAction('format')
-
-augroup format_on_save
-  autocmd BufWritePost *.cpp,*.h :call CocAction('format')
-augroup END
-
-" Applying codeAction to the selected region.
-" Example: `<leader>aap` for current paragraph
-nmap <leader>a  <Plug>(coc-codeaction-selected)
-
-" Remap keys for applying codeAction to the current line.
-nmap <leader>ac  <Plug>(coc-codeaction)
-
-" Jump to next error
-nmap <leader>en <Plug>(coc-diagnostic-next-error)
-nmap <leader>wn <Plug>(coc-diagnostic-next)
-
-" Apply AutoFix to problem on the current line.
-nmap <leader>qf  <Plug>(coc-fix-current)
-
-" Highlight the symbol and its references when holding the cursor.
-autocmd CursorHold * silent call CocActionAsync('highlight')
-
 "=> Vista
-let g:vista_default_executive = 'coc'
 let g:vista_icon_indent = ["╰─▸ ", "├─▸ "]
 
 " => Lightline
@@ -214,9 +162,10 @@ function! LightlineReload()
 endfunction
 
 " => Treesitter
+highlight link TSError Normal
 lua <<EOF
 require'nvim-treesitter.configs'.setup {
-  ensure_installed = { "c", "cpp", "make", "ruby", "javascript", "typescript", "python", "rust", "json", "jsdoc", "html", "vim" },
+  ensure_installed = { "c", "cpp", "make", "ruby", "javascript", "typescript", "tsx", "css", "python", "rust", "json", "jsdoc", "html", "vim" },
   highlight = {
     enable = true,
   },
@@ -233,3 +182,8 @@ let g:neoformat_enabled_javascript = ['prettier']
 
 " => Rails
 nmap <C-a> :A<cr>
+
+" => Mergetool
+let g:mergetool_layout = 'mr'
+let g:mergetool_prefer_revision = 'local'
+nmap <leader>mt <plug>(MergetoolToggle)

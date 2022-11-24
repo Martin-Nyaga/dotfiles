@@ -210,8 +210,9 @@ autocmd BufNewFile,BufRead *.em set filetype=emerald
 autocmd FileType emerald setlocal commentstring=#\ %s
 
 " Add Python support
-" let g:python3_host_prog="$HOME/pythonenv/bin/python"
-" let g:python_host_prog="$HOME/pythonenv/bin/python"
+let g:loaded_python3_provider = 0
+" let g:python3_host_prog="$HOME/.asdf/shims/python"
+" let g:python_host_prog="$HOME/.asdf/shims/python"
 
 " Helper functions
 function! CmdLine(str)
@@ -240,3 +241,5 @@ if isdirectory($PWD .'/node_modules')
   let $PATH .= ':' . $PWD . '/node_modules/.bin'
 endif
 
+" Update quicker
+set updatetime=100

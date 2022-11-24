@@ -3,6 +3,7 @@ vim/plugins/*
 !vim/plugins/.keep
 vim/.netrwhist
 vim/autoload/plug.vim
+vim/autoload/plug.vim.old
 vim/view
 vim/tags
 vim/pythonenv

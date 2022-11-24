@@ -1,4 +1,6 @@
 {
   "clangd.path": "/home/martin/.config/coc/extensions/coc-clangd-data/install/12.0.1/clangd_12.0.1/bin/clangd",
-  "clangd.arguments": ["--log=verbose"]
+  "clangd.arguments": ["--log=verbose"],
+  "solargraph.diagnostics": true,
+  "suggest.noselect": true
 }
