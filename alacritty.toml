@@ -1,0 +1,12 @@
+[terminal]
+shell = { program = "C:\\Windows\\System32\\wsl.exe", args = ["-d Debian", "--cd ~"] }
+
+[window]
+padding = { x = 10, y = 10 }
+
+[font]
+normal = { family = "Martian Mono Std Lt" }
+bold = { family = "Martian Mono Std Lt" }
+italic = { family = "Martian Mono Std Lt", style = "Regular" }
+bold_italic = { family = "Martian Mono Std Lt", style = "Regular" }
+offset = { x = 0, y = 3} 
