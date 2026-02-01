@@ -20,3 +20,5 @@ parse_git_branch () {
 
 # Terminal Prompt
 export PS1='\e[1m\e[32m\w\e[0m \e[33m$(parse_git_branch) \e[0m\n→ '
+
+if [ -e /home/martin/.nix-profile/etc/profile.d/nix.sh ]; then . /home/martin/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer

@@ -1,0 +1,65 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+require 'tempfile'
+require 'yaml'
+
+PROJECT_NAME = 'fitlab'
+PROJECT_ROOT = '~/Documents/DRS/fit-lab'
+
+WINDOWS = {
+  'web' => 'pnpm dev:web',
+  'api' => 'pnpm dev:backend',
+  'mobile' => 'cd packages/app-mobile && pnpm dev:native-build',
+  'studio' => 'cd packages/api && pnpm db:studio',
+  'claude' => 'claude'
+}.freeze
+
+ALL_WINDOWS = WINDOWS.keys.freeze
+DEFAULT_WINDOWS = %w[api mobile claude].freeze
+
+def build_config(requested_windows)
+  windows = []
+
+  requested_windows.each do |name|
+    if WINDOWS.key?(name)
+      windows << { name => WINDOWS[name] }
+    else
+      warn "Unknown window: #{name}"
+    end
+  end
+
+  # Scratch window always runs last
+  windows << { 'scratch' => 'cursor .' }
+
+  {
+    'name' => PROJECT_NAME,
+    'root' => PROJECT_ROOT,
+    'windows' => windows
+  }
+end
+
+def main
+  args = ARGV.map(&:downcase)
+
+  requested = if args.empty?
+                DEFAULT_WINDOWS
+              elsif args.include?('none')
+                []
+              elsif args.include?('all')
+                ALL_WINDOWS
+              else
+                args
+              end
+
+  config = build_config(requested)
+
+  Tempfile.create(['fitlab-', '.yml']) do |f|
+    f.write(config.to_yaml)
+    f.flush
+
+    exec('tmuxinator', 'start', '-p', f.path)
+  end
+end
+
+main

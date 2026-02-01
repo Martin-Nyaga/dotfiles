@@ -1,8 +1,19 @@
+if exists('g:vscode')
+  "Do not execute rest of this file, do not apply any configs
+  finish
+endif
+
 " => nvim-cmp & neovim-lspconfig
 set completeopt=menu,menuone,noselect
 lua <<EOF
   -- Set up nvim-cmp.
-  local cmp = require'cmp'
+  local has_words_before = function()
+    local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+    return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+  end
+
+  local luasnip = require("luasnip")
+  local cmp = require("cmp")
 
   cmp.setup({
     completion = {
@@ -15,15 +26,15 @@ lua <<EOF
       end,
     },
     window = {
-      completion = cmp.config.window.bordered(),
-      documentation = cmp.config.window.bordered(),
+      -- completion = cmp.config.window.bordered(),
+      -- documentation = cmp.config.window.bordered(),
     },
     mapping = cmp.mapping.preset.insert({
       ['<C-b>'] = cmp.mapping.scroll_docs(-4),
       ['<C-f>'] = cmp.mapping.scroll_docs(4),
       ['<C-Space>'] = cmp.mapping.complete(),
       ['<C-e>'] = cmp.mapping.abort(),
-      ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+      ['<CR>'] = cmp.mapping.confirm({ select = false }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
       ["<Tab>"] = cmp.mapping(function(fallback)
         if cmp.visible() then
           cmp.select_next_item()
@@ -85,10 +96,10 @@ lua <<EOF
   -- See `:help vim.diagnostic.*` for documentation on any of the below functions
   local opts = { noremap=true, silent=true }
   vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, opts)
-  vim.keymap.set('n', '<leader>en', vim.diagnostic.goto_prev, opts)
-  vim.keymap.set('n', '<leader>ep', vim.diagnostic.goto_next, opts)
-  vim.keymap.set('n', '<leader>wn', vim.diagnostic.goto_prev, opts)
-  vim.keymap.set('n', '<leader>wp', vim.diagnostic.goto_next, opts)
+  vim.keymap.set('n', '<leader>en', vim.diagnostic.goto_next, opts)
+  vim.keymap.set('n', '<leader>ep', vim.diagnostic.goto_prev, opts)
+  vim.keymap.set('n', '<leader>wn', vim.diagnostic.goto_next, opts)
+  vim.keymap.set('n', '<leader>wp', vim.diagnostic.goto_prev, opts)
   vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, opts)
 
   -- Use an on_attach function to only map the following keys
@@ -113,7 +124,8 @@ lua <<EOF
     vim.keymap.set('n', '<leader>D', vim.lsp.buf.type_definition, bufopts)
     vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, bufopts)
     vim.keymap.set('n', '<leader>ac', vim.lsp.buf.code_action, bufopts)
-    vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
+    -- Handled by Trouble now
+    -- vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
     vim.keymap.set('n', '<leader>f', function() vim.lsp.buf.format { async = true } end, bufopts)
   end
 
@@ -122,6 +134,48 @@ lua <<EOF
     capabilities = capabilities,
     on_attach = on_attach
   }
+  require('lspconfig').ts_ls.setup{
+    capabilities = capabilities,
+    on_attach = on_attach
+  }
+  require('lspconfig').rust_analyzer.setup {
+    settings = {
+      ['rust-analyzer'] = {},
+    },
+    capabilities = capabilities,
+    on_attach = on_attach
+  }
+
+  require('lspconfig').ruby_lsp.setup({
+    init_options = {
+      formatter = 'standard',
+      linters = { 'standard' },
+    },
+    capabilities = capabilities,
+    on_attach = on_attach
+  })
+
+  --  require('lspconfig').clangd.setup({
+  --    capabilities = capabilities,
+  --    on_attach = on_attach
+  --  })
+
+
+  vim.diagnostic.config({
+    virtual_text = true
+  })
+
+  local signs = {
+      Error = "●",
+      Warn = "●",
+      Hint = "●",
+      Info = "●"
+  }
+
+  for type, icon in pairs(signs) do
+      local hl = "DiagnosticSign" .. type
+      vim.fn.sign_define(hl, {text = icon, texthl = hl, numhl = hl})
+  end
 EOF
 
 " Only complete after 100ms

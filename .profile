@@ -28,6 +28,7 @@ export EDITOR=nvim
 
 # Use neovim as default vim
 alias vim='nvim'
+alias v='nvim'
 
 # Common Projects
 alias cdd='cd $HOME/.dotfiles'
@@ -54,13 +55,13 @@ export LESS='-RQ'
 [ -f $HOME/.fzf.zsh ] && source $HOME/.fzf.zsh
 
 # Base16 Shell
-# BASE16_SHELL="$HOME/.config/base16-shell/"
-#   [ -n "$PS1" ] && \
-#   [ -s "$BASE16_SHELL/profile_helper.sh" ] && \
-#   eval "$("$BASE16_SHELL/profile_helper.sh")"
-
+BASE16_SHELL="$HOME/.config/base16-shell/"
+[ -n "$PS1" ] && \
+    [ -s "$BASE16_SHELL/profile_helper.sh" ] && \
+        source "$BASE16_SHELL/profile_helper.sh"
+        
 # Base 16 Theme
-# [ ! -f ~/.base16_theme ] && base16_material-darker
+[ ! -f ~/.base16_theme ] && base16_material-darker
 
 # Platform specific settings
 [ -f ~/.dotfiles/.profile.extra ] && source ~/.dotfiles/.profile.extra
@@ -70,3 +71,6 @@ export GPG_TTY=$(tty)
 
 # Direnv
 hash direnv 2>/dev/null && eval "$(direnv hook zsh)"
+
+# Git typos
+alias gti="git"

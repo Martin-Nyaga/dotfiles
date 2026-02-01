@@ -34,20 +34,23 @@ set foldmethod=indent
 set so=2
 
 " Highlight line under cursor
-set cursorline
+" set cursorline
 
 " Limit text width
-set colorcolumn=80
+" set colorcolumn=80
 set textwidth=80
 
 " Turn on the Wild menu
 set wildmenu
+set wildmode=longest,list:full
 
 " Ignore files in the wildmenu
 set wildignore=*.o,*~,*.pyc,*/.git/*,*/.hg/*,*/.svn/*,*/.DS_Store
 
 " Height of the command bar
-set cmdheight=2
+set cmdheight=1
+
+set signcolumn=yes:2
 
 " Configure backspace and cursor wrapping
 " so it acts as it should act
@@ -134,7 +137,7 @@ vnoremap <silent> # :<C-u>call VisualSelection('', '')<CR>?<C-R>=@/<CR><CR>
 set mouse=a
 
 " Statusline
-set laststatus=2
+set laststatus=1
 
 " Return to last edit position when opening files
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
@@ -147,7 +150,7 @@ fun! CleanExtraSpaces()
   call setpos('.', save_cursor)
   call setreg('/', old_query)
 endfun
-autocmd BufWritePre *.rb,*.txt,*.js,*.py,*.wiki,*.sh,*.coffee,*.haml :call CleanExtraSpaces()
+autocmd BufWritePre *.rb,*.js,*.py,*.wiki,*.sh,*.coffee,*.haml,*.mdx,*.md :call CleanExtraSpaces()
 
 " Fast shortcuts for netrw
 map <leader>nn :Explore.<cr>
@@ -243,3 +246,11 @@ endif
 
 " Update quicker
 set updatetime=100
+
+"Local configs
+autocmd BufRead,BufNewFile /home/martin/Documents/Siemens/*.cpp setlocal noexpandtab sw=4 tabstop=4
+autocmd BufRead,BufNewFile /home/martin/Documents/Siemens/*.h setlocal noexpandtab sw=4 tabstop=4
+autocmd BufRead,BufNewFile /home/martin/Documents/Siemens/*.js setlocal noexpandtab sw=4 tabstop=4
+autocmd BufRead,BufNewFile /home/martin/Documents/Siemens/*.ts setlocal noexpandtab sw=4 tabstop=4
+autocmd BufRead,BufNewFile /home/martin/Documents/Siemens/*.scss setlocal noexpandtab sw=4 tabstop=4
+autocmd BufRead,BufNewFile /home/martin/Documents/Siemens/*.html setlocal noexpandtab sw=4 tabstop=4
